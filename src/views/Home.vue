@@ -1,21 +1,39 @@
 <template>
   <main class="main_area">
-    
+    <input  type="text" v-model="vLink" placeholder="輸入網址"/>
+    <button type="button" @click="linkSubmit">新增</button>
     <div class="frame">
-      
-      <!-- <videoFrame videolink="https://www.youtube.com/embed/9rZxl57IgVk?autoplay=1" /> -->
+      <videoFrame :videolink='link'/>
     </div>
   </main>
 </template>
 
 <script>
 // @ is an alias to /src
-import videoFrame from '@/components/videoFrame.vue'
-
 export default {
-  name: 'frame',
+  name: 'videoLinkInput',
   components: {
-    videoFrame
+    videoFrame: () => import('@/components/videoFrame.vue')
+  },
+  data() {
+    return {
+      vLink: this.value,
+      link: ''
+    }
+  },
+  watch: {
+    vLink: function() {
+      // console.log(val)
+      return this.value
+    }
+  },
+  methods: {
+    linkSubmit: function() {
+        this.link = this.vLink
+    }
+      // console.log(this.vLink)
+      // console.log(this.link)
+      // this.link  = 'https://www.youtube.com/embed/WbwxQYn4gBE?autoplay=1'
   }
 }
 </script>
