@@ -2,9 +2,7 @@
   <main class="main_area">
     <input  type="text" v-model="vLink" placeholder="輸入網址"/>
     <button type="button" @click="linkSubmit">新增</button>
-    <div class="frame">
-      <videoFrame :videolink='link'/>
-    </div>
+    <videoFrame :videolink='link'/>
   </main>
 </template>
 
@@ -21,19 +19,22 @@ export default {
       link: ''
     }
   },
-  watch: {
-    vLink: function() {
-      // console.log(val)
-      return this.value
-    }
-  },
+  // watch: {
+  //   vLink: function() {
+  //     return this.value
+  //   }
+  // },
   methods: {
     linkSubmit: function() {
-        this.link = this.vLink
+      var getValue = this.vLink.split('https://www.youtube.com/watch?v=').join(''),
+          getValue = getValue.split('?'),
+          link = 'https://www.youtube.com/embed/' + getValue[0] + '?autoplay=1'
+        this.link = link
+        this.vLink = ''
     }
-      // console.log(this.vLink)
       // console.log(this.link)
-      // this.link  = 'https://www.youtube.com/embed/WbwxQYn4gBE?autoplay=1'
+      // https://www.youtube.com/watch?v=ITz2Rl0gbOs?autoplay=1
+      // this.link  = 'https://www.youtube.com/embed/ITz2Rl0gbOs?autoplay=1'
   }
 }
 </script>
