@@ -1,9 +1,7 @@
 <template>
   <div class="frame">
-    <div class="wrapper">
-      <button class="remove_frame" type="button" @click="remove">刪除</button>
-      <iframe type="text/html" :src='videolink' allowfullscreen/>
-    </div>
+    <button class="remove_frame" type="button" @click="remove">刪除</button>
+    <iframe type="text/html" :src='vLinkInput' allowfullscreen/>
   </div>
 </template>
 
@@ -11,11 +9,24 @@
 export default {
   name: 'videoframe',
   props: {
-    videolink: String
+    videoLink: String,
+    key: Number
+  },
+  // data() {
+  //   videoLink: ''
+  // },
+  computed: {
+    vLinkInput() {
+      // var link = this.videoLink + 'ooo'
+      var getValue = this.videoLink.split('https://www.youtube.com/watch?v=').join('')
+          getValue = getValue.split('?')
+      var link = 'https://www.youtube.com/embed/' + getValue[0] + '?autoplay=1'
+      return link
+    }
   },
   methods: {
     remove: function() {
-      
+      this.$el.parentNode.removeChild(this.$el);
     }
   }
 }
@@ -28,10 +39,6 @@ $playerWidth: 720px
   display: flex
   flex-flow: row wrap
   justify-content: space-evenly
-  .wrapper
-    display: flex
-    flex-flow: column wrap
-    align-items: flex-end
   .remove_frame
     width: 4rem
 

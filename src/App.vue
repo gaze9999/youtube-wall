@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <topbar/>
-    <inputbar/>
+    <inputbar v-on:updateLinks="updateLinks"/>
     <router-view/>
     <toastr ref="toastr"></toastr>
   </div>
@@ -13,7 +13,19 @@ export default {
     topbar: () => import('@/components/topbar.vue'),
     inputbar: () => import('@/components/inputbar.vue'),
     toastr: () => import('vue-toastr'),
-  }  
+  },
+  props: {
+  },
+  data() {
+    return {
+      videoLinks: []
+    }
+  },
+  methods: {
+    updateLinks(vLinks) {
+      this.videoLinks = vLinks
+    }
+  }
 }
 </script>
 
