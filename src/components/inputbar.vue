@@ -1,9 +1,7 @@
 <template>
   <div id="inputbar">
-    <label for="link_input">Link:</label>
-    <input type="text" name="link_input" id="link_input" v-model.trim="inputLink"/>
-    <a type="button" class="btn btn-info" @click="sendLink">send</a>
-    <!-- <p>{{ vLinks }}</p> -->
+    <input type="text" name="link_input" id="link_input" v-model.trim="inputLink" placeholder="輸入網址"/>
+    <a type="button" class="btn btn-info" @click="sendLink">送出</a>
   </div>
 </template>
 
