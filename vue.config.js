@@ -1,5 +1,5 @@
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'youtube-wall'
-    ? '/youtubewall/'
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/youtube-wall/'
     : '/'
 }
