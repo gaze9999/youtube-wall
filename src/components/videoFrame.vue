@@ -1,7 +1,8 @@
 <template lang="pug">
-v-col.youtube_frame
-  v-btn.remove_frame(@click='remove') 刪除
-  iframe(type='text/html', :src='vLinkInput', allowfullscreen)
+v-col.youtube_frame()
+  v-btn(icon='', @click='remove', color='white', absolute, large, right)
+    v-icon mdi-close-circle
+  iframe(type='text/html', :src='vLinkInput', allowfullscreen, absolute, width='100%', height='360px * 0.5625')
 </template>
 
 <script>
@@ -11,11 +12,11 @@ export default {
     videoLink: {
       index: Number,
       videoId:String
-      }
+      },
   },
   data() {
     return {
-      updateLinks: []
+      updateLinks: [],
     };
   },
   computed: {
@@ -29,7 +30,7 @@ export default {
       this.$store.commit('removeLink', this.videoLink)
       localStorage.videoLocalStore = JSON.stringify(this.$store.state.videoStore)
       this.$toastr.i("link removed");
-    }
+    },
   }
 }
 </script>
@@ -37,11 +38,11 @@ export default {
 <style scoped lang="sass">
 $playerWidth: 720px
 
+.youtube_frame
+  position: relative
+
 iframe
   border: none
   background: #ccc
-  max-width: $playerWidth
-  max-height: $playerWidth * 0.5625
-  width: $playerWidth
-  height: $playerWidth * 0.5625
+  // height: calc(100% * 0.5625)
 </style>
