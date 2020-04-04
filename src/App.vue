@@ -5,8 +5,10 @@ v-app
     v-spacer
     inputbar
     v-spacer
-    v-btn(icon='', to='/')
-      v-icon mdi-home
+    v-btn.mx-1(icon='', to='/list')
+      v-icon mdi-format-list-bulleted-square
+    v-btn.mx-1(icon='', to='/')
+      v-icon mdi-television
   v-content
     router-view
   toastr(ref='toastr')
