@@ -1,8 +1,8 @@
 <template>
-  <div class="frame">
-    <button class="remove_frame" type="button" @click="remove">刪除</button>
+  <v-col class="youtube_frame">
+    <v-btn class="remove_frame" @click="remove">刪除</v-btn>
     <iframe type="text/html" :src='vLinkInput' allowfullscreen/>
-  </div>
+  </v-col>
 </template>
 
 <script>
@@ -14,21 +14,21 @@ export default {
       link:String
       }
   },
-  // data() {
-  //   videoLink: ''
-  // },
+  data() {
+    return {
+      updateLinks: []
+    };
+  },
   computed: {
     vLinkInput() {
-      // var link = this.videoLink + 'ooo'
-      var getValue = this.videoLink.link.split('https://www.youtube.com/watch?v=').join('')
-          getValue = getValue.split('?')
-      var link = 'https://www.youtube.com/embed/' + getValue[0] + '?autoplay=1'
-      return link
+      var linkEmbed = `https://www.youtube.com/embed/${this.videoLink.videoId}?autoplay=1`
+      return linkEmbed
     }
   },
   methods: {
     remove: function() {
-      this.$emit('removeLink', this.videoLink.index)      
+      this.$store.commit('removeLink', this.videoLink)
+      localStorage.videoLocalStore = JSON.stringify(this.$store.state.videoStore)
       this.$toastr.i("link removed");
     }
   }
@@ -37,13 +37,6 @@ export default {
 
 <style scoped lang="sass">
 $playerWidth: 720px
-
-.frame
-  display: flex
-  flex-flow: row wrap
-  justify-content: space-evenly
-  .remove_frame
-    width: 4rem
 
 iframe
   border: none

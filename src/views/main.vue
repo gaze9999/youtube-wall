@@ -1,9 +1,16 @@
 <template>
-  <main>
-    <div class="frames">
-      <videoFrame v-on:removeLink="removeLink" v-for="link in this.$parent.videoLinks" :key="link.index" :videoLink="link"/>
-    </div>
-  </main>
+  <v-container
+    class="frames"
+    fluid
+  >
+  <v-row v-if="this.$store.state.linkCount > 0">
+    <videoFrame
+      v-for="link in videoLinks"
+      :key="link.index"
+      :videoLink="link"
+    />
+  </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -13,17 +20,19 @@ export default {
     videoFrame: () => import('@/components/videoFrame.vue')
   },
   props: {
-    videoLinks: [{
-      index: Number,
-      link: String
-    }]
+  },
+  data() {
+    return {
+      videoLinks: [{
+        index: Number,
+        videoLink: String
+      }]
+    }
+  },
+  created() {
+    this.videoLinks = this.$store.state.videoStore
   },
   methods: {
-    removeLink(removeLinkIndex) {
-      this.$parent.videoLinks.forEach(function(vLink, vLinkIndex, vLinkArray) {
-        if (vLink.index === removeLinkIndex) { vLinkArray.splice(vLinkIndex, 1) }
-      });
-    }
   }
 }
 </script>
