@@ -7,7 +7,7 @@ v-app
     v-spacer
     v-btn.mx-1(icon='', to='/youtube-wall/list')
       v-icon mdi-format-list-bulleted-square
-    v-btn.mx-1(icon='', to='/youtube-wall/wall')
+    v-btn.mx-1(icon='', to='/youtube-wall/')
       v-icon mdi-television
   v-content
     router-view
