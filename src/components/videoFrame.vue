@@ -1,8 +1,7 @@
-<template>
-  <v-col class="youtube_frame">
-    <v-btn class="remove_frame" @click="remove">刪除</v-btn>
-    <iframe type="text/html" :src='vLinkInput' allowfullscreen/>
-  </v-col>
+<template lang="pug">
+v-col.youtube_frame
+  v-btn.remove_frame(@click='remove') 刪除
+  iframe(type='text/html', :src='vLinkInput', allowfullscreen)
 </template>
 
 <script>
@@ -11,7 +10,7 @@ export default {
   props: {
     videoLink: {
       index: Number,
-      link:String
+      videoId:String
       }
   },
   data() {

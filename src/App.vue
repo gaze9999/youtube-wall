@@ -1,22 +1,15 @@
-<template>
-  <v-app>
-    <v-app-bar app color="primary" dark flat>
-      <v-toolbar-title>Youtube 電視牆</v-toolbar-title>
-      <v-spacer></v-spacer>
-
-      <inputbar></inputbar>
-      <v-spacer></v-spacer>
-
-      <v-btn icon to="/">
-        <v-icon>mdi-home</v-icon>
-      </v-btn>
-    </v-app-bar>
-
-    <v-content>
-      <router-view />
-    </v-content>
-    <toastr ref="toastr"></toastr>
-  </v-app>
+<template lang="pug">
+v-app
+  v-app-bar(app, color='primary', dark, flat)
+    v-toolbar-title Youtube 電視牆
+    v-spacer
+    inputbar
+    v-spacer
+    v-btn(icon='', to='/')
+      v-icon mdi-home
+  v-content
+    router-view
+  toastr(ref='toastr')
 </template>
 
 <script>
@@ -34,8 +27,6 @@ export default {
       localStorage.videoLocalStore = []
     }
   },
-  methods: {
-  }
 };
 </script>
 

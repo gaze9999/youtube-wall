@@ -1,15 +1,7 @@
-<template>
-  <v-row
-    id="inputbar"
-    align-center
-  >
-    <v-text-field
-      v-model.trim="inputLink"
-      placeholder="輸入網址"
-      hide-details
-    />
-    <v-btn class="mx-2" @click="sendLink">送出</v-btn>
-  </v-row>
+<template lang="pug">
+v-row#inputbar(align-center)
+  v-text-field(v-model.trim='inputLink', placeholder='輸入網址', hide-details, @keyup.enter.native='sendLink')
+  v-btn.mx-2(@click='sendLink') 送出
 </template>
 
 <script>
