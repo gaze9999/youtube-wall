@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: 'Home',
+  name: 'Main',
   components: {
     videoFrame: () => import('@/components/videoFrame.vue')
   },
