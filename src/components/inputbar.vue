@@ -28,7 +28,6 @@ export default {
         });
         this.linkCounts += 1;
         this.inputLink = "";
-        // console.log(this.vLinks)
         this.$emit('updateLinks', this.vLinks)
       } else {
         this.$toastr.e("link not input");

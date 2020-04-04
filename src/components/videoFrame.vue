@@ -9,8 +9,10 @@
 export default {
   name: 'videoframe',
   props: {
-    videoLink: String,
-    key: Number
+    videoLink: {
+      index: Number,
+      link:String
+      }
   },
   // data() {
   //   videoLink: ''
@@ -18,7 +20,7 @@ export default {
   computed: {
     vLinkInput() {
       // var link = this.videoLink + 'ooo'
-      var getValue = this.videoLink.split('https://www.youtube.com/watch?v=').join('')
+      var getValue = this.videoLink.link.split('https://www.youtube.com/watch?v=').join('')
           getValue = getValue.split('?')
       var link = 'https://www.youtube.com/embed/' + getValue[0] + '?autoplay=1'
       return link
@@ -26,7 +28,8 @@ export default {
   },
   methods: {
     remove: function() {
-      this.$el.parentNode.removeChild(this.$el);
+      this.$emit('removeLink', this.videoLink.index)      
+      this.$toastr.i("link removed");
     }
   }
 }
