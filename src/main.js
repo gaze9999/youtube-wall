@@ -5,19 +5,20 @@ import store from './store'
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Toastr from 'vue-toastr';
-
-Vue.config.productionTip = false
+import vuetify from './plugins/vuetify';
 
 const toastrConfig = {
   defaultTimeout: 2000,
   defaultProgressBar: false,
-  defaultPosition: "toast-top-right",
+  defaultPosition: "toast-bottom-right",
   defaultCloseOnHover: false,
 };
 Vue.use(Toastr, toastrConfig);
+Vue.config.productionTip = false
 
 new Vue({
   router,
   store,
+  vuetify,
   render: h => h(App)
 }).$mount('#app')
