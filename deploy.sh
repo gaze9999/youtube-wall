@@ -1,19 +1,11 @@
 #!/usr/bin/env sh
-
-# 当发生错误时中止脚本
+# 當發生錯誤時終止腳本運行
 set -e
-
-# 构建
+# 打包
 npm run build
-
-# cd 到构建输出的目录下 
 cd dist
-
 git init
 git add -A
 git commit -m 'deploy'
-
-# 部署到 https://<USERNAME>.github.io/<REPO>
-git push -f git@github.com:gaze9999/youtube-wall.git master:gh-pages
-
+git push -f https://github.com/gaze9999/youtube-wall.git master:gh-pages
 cd -
