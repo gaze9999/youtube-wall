@@ -7,7 +7,7 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/youtube-wall/',
     name: 'Home',
     component: Main
   },
@@ -17,7 +17,7 @@ const routes = [
     component: vtuberList
   },
   { path: '*',
-    redirect: '/'
+    redirect: '/youtube-wall/'
   },
 ]
 
