@@ -15,19 +15,16 @@ const routes = [
     path: '/list',
     name: 'Vtuber List',
     component: vtuberList
-  }
-  // {
-    // path: '/about',
-    // name: 'About',
-    // // route level code-splitting
-    // // this generates a separate chunk (about.[hash].js) for this route
-    // // which is lazy-loaded when the route is visited.
-    // component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  // }
+  },
+  { path: '*',
+    redirect: '/'
+  },
 ]
 
 const router = new VueRouter({
-  routes
+  routes,
+  mode: 'history',
+  hash: false,
 })
 
 export default router
