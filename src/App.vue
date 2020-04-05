@@ -10,7 +10,7 @@ v-app
     v-btn.mx-1(icon='', to='/youtube-wall/')
       v-icon mdi-television
   v-content
-    router-view
+    router-view(v-on:updateNumber="showHeight")
   toastr(ref='toastr')
 </template>
 
@@ -26,9 +26,14 @@ export default {
       this.$store.commit('updateLinks', JSON.parse(localStorage.videoLocalStore))
     } else {
       this.$store.state.videoStore.splice(0)
-      localStorage.videoLocalStore = []
+      localStorage.videoLocalStore = '[]'
     }
   },
+  methods: {
+    showHeight() {
+      console.log(this.videoCount)
+    }
+  }
 };
 </script>
 

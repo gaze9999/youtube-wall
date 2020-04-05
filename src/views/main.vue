@@ -1,6 +1,6 @@
 <template lang="pug">
 v-container.frames(fluid, fill-height)
-  v-row(v-if='videoCount > 0')
+  v-row
     videoFrame(v-for='link in videoLinks', :key='link.index', :videoLink='link')
 </template>
 
@@ -16,11 +16,12 @@ export default {
         index: Number,
         videoId: String
       }],
-      videoCount: this.$store.state.linkCount
+      videoCount: this.$store.state.linkCount,
+      linkIndex: Number,
     }
   },
   created() {
     this.videoLinks = this.$store.state.videoStore
-  },
+  }
 }
 </script>

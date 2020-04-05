@@ -11,22 +11,24 @@ export default {
     videoLink: {
       index: Number,
       link:String
-      }
+      },
+    linkIndex: Number,
   },
   data() {
     return {
       inputLink: "",
-      updateLink: {}
+      updateLink: {},
     };
   },
   methods: {
     sendLink() {
       if (this.inputLink !== "") {
         this.updateLink = {
-          index: this.$store.state.videoStore.length,
+          index: this.$store.state.linkIndex,
           videoId: this.filterLink(this.inputLink)
         };
         this.$store.commit('addLink', this.updateLink)
+        this.$store.commit('updateWidth', this.$el.clientWidth)
         localStorage.videoLocalStore = JSON.stringify(this.$store.state.videoStore)
         this.inputLink = ""
       } else {

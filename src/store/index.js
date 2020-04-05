@@ -9,23 +9,31 @@ export default new Vuex.Store({
       index: Number,
       videoId: String
     }],
-    linkCount: 0
+    linkCount: 0,
+    linkIndex: 0,
+    videoWidth: String
   },
   mutations: {
     addLink(state, payload) {
       state.videoStore.unshift(payload)
+      state.linkIndex = state.videoStore[0].index + 1
       state.linkCount += 1
     },
     removeLink(state, payload) {
       state.videoStore.forEach(function(storeItem, storeIndex, storeArray) {
         if (storeItem.index === payload.index) { storeArray.splice(storeIndex, 1) }
       })
+      state.linkIndex = state.videoStore[0].index + 1
       state.linkCount -= 1
     },
     updateLinks(state, payload) {
       state.videoStore = payload
+      state.linkIndex = state.videoStore[0].index + 1
       state.linkCount = state.videoStore.length
     },
+    updateWidth(state, payload) {
+      state.videoWidth = payload * 0.5625 + 'px'
+    }
   },
   actions: {
   },
