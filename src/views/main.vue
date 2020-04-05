@@ -1,7 +1,7 @@
 <template lang="pug">
 v-container.frames(fluid, fill-height)
   v-row
-    videoFrame(v-for='link in videoLinks', :key='link.index', :videoLink='link')
+    videoFrame(v-for='link in videoLinks', :key='link.index', :videoLink='link' style="flex-basis: 50%")
 </template>
 
 <script>
