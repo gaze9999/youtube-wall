@@ -17,14 +17,19 @@ export default new Vuex.Store({
     addLink(state, payload) {
       state.videoStore.unshift(payload)
       state.linkIndex = state.videoStore[0].index + 1
-      state.linkCount += 1
+      state.linkCount = state.videoStore.length
     },
     removeLink(state, payload) {
       state.videoStore.forEach(function(storeItem, storeIndex, storeArray) {
         if (storeItem.index === payload.index) { storeArray.splice(storeIndex, 1) }
       })
-      state.linkIndex = state.videoStore[0].index + 1
-      state.linkCount -= 1
+      if (state.videoStore.length == 0) {
+        localStorage.videoLocalStore = []
+        state.linkIndex = 0
+      } else {
+        state.linkIndex = state.videoStore[0].index + 1
+      }
+      state.linkCount = state.videoStore.length
     },
     updateLinks(state, payload) {
       state.videoStore = payload

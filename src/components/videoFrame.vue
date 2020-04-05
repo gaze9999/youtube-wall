@@ -40,9 +40,6 @@ export default {
     this.heightSet = this.$store.state.videoWidth
   },
   watch: {
-    widthSet() {
-      console.log(111)
-    }
   },
   methods: {
     remove: function() {
