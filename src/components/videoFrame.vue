@@ -1,8 +1,8 @@
-<template>
-  <div class="frame">
-    <button class="remove_frame" type="button" @click="remove">刪除</button>
-    <iframe type="text/html" :src='vLinkInput' allowfullscreen/>
-  </div>
+<template lang="pug">
+v-col.youtube_frame
+  v-btn(icon='', @click='remove', color='white', absolute, large, right)
+    v-icon mdi-close-circle
+  iframe(type='text/html', :src='vLinkInput', allowfullscreen, absolute, width='100%', height='100%')
 </template>
 
 <script>
@@ -11,45 +11,49 @@ export default {
   props: {
     videoLink: {
       index: Number,
-      link:String
-      }
+      videoId:String
+      },
+    linkIndex: Number,
   },
-  // data() {
-  //   videoLink: ''
-  // },
+  data() {
+    return {
+      videoCount: this.$store.state.videoStore.length,
+      widthSet: '',
+      heightSet: 0
+    };
+  },
   computed: {
     vLinkInput() {
-      // var link = this.videoLink + 'ooo'
-      var getValue = this.videoLink.link.split('https://www.youtube.com/watch?v=').join('')
-          getValue = getValue.split('?')
-      var link = 'https://www.youtube.com/embed/' + getValue[0] + '?autoplay=1'
-      return link
+      var linkEmbed = `https://www.youtube.com/embed/${this.videoLink.videoId}?autoplay=1`
+      return linkEmbed
+    },
+    updateHeight() {
+      return this.heightSet
     }
+  },
+  mounted() {
+    this.$store.commit('updateWidth', this.$el.clientWidth)
+    this.widthSet = this.$el.clientWidth
+    this.heightSet = this.$store.state.videoWidth
   },
   methods: {
     remove: function() {
-      this.$emit('removeLink', this.videoLink.index)      
+      this.$store.commit('removeLink', this.videoLink)
+      this.$store.commit('updateWidth', this.$el.clientWidth)
+      this.heightSet = this.$store.state.videoWidth
+      localStorage.videoLocalStore = JSON.stringify(this.$store.state.videoStore)
       this.$toastr.i("link removed");
-    }
+    },
   }
 }
 </script>
 
 <style scoped lang="sass">
-$playerWidth: 720px
-
-.frame
-  display: flex
-  flex-flow: row wrap
-  justify-content: space-evenly
-  .remove_frame
-    width: 4rem
+.youtube_frame
+  position: relative
 
 iframe
   border: none
   background: #ccc
-  max-width: $playerWidth
-  max-height: $playerWidth * 0.5625
-  width: $playerWidth
-  height: $playerWidth * 0.5625
+  // height: calc(100% * 0.5625)
 </style>

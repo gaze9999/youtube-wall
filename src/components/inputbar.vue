@@ -1,48 +1,57 @@
-<template>
-  <div id="inputbar">
-    <label for="link_input">Link:</label>
-    <input type="text" name="link_input" id="link_input" v-model.trim="inputLink"/>
-    <a type="button" class="btn btn-info" @click="sendLink">send</a>
-    <!-- <p>{{ vLinks }}</p> -->
-  </div>
+<template lang="pug">
+v-row#inputbar(align-center)
+  v-text-field(v-model.trim='inputLink', placeholder='輸入網址', hide-details, @keyup.enter.native='sendLink')
+  v-btn.mx-2.font-weight-bold(@click='sendLink', light) 送出
 </template>
 
 <script>
 export default {
   name: "inputbar",
   props: {
+    videoLink: {
+      index: Number,
+      link:String
+      },
+    linkIndex: Number,
   },
   data() {
     return {
       inputLink: "",
-      linkCounts: 0,
-      vLinks: []
+      updateLink: {},
     };
   },
   methods: {
     sendLink() {
       if (this.inputLink !== "") {
-        this.vLinks.unshift({
-          index: this.linkCounts,
-          link: this.inputLink
-        });
-        this.linkCounts += 1;
-        this.inputLink = "";
-        this.$emit('updateLinks', this.vLinks)
+        this.updateLink = {
+          index: this.$store.state.linkIndex,
+          videoId: this.filterLink(this.inputLink)
+        };
+        this.$store.commit('addLink', this.updateLink)
+        this.$store.commit('updateWidth', this.$el.clientWidth)
+        localStorage.videoLocalStore = JSON.stringify(this.$store.state.videoStore)
+        this.inputLink = ""
       } else {
         this.$toastr.e("link not input");
       }
+    },
+    filterLink(link) {
+      var getLink = ''
+          // chatEmbed = `https://www.youtube.com/live_chat?v=${getLink}&embed_domain=gaze9999.github.io`
+      link = link.split('/')
+      link[0] !== 'https:' ?
+        (getLink = link[1]) :
+        (getLink = link[3])
+      getLink.length > 11 && (
+        getLink = getLink.split('watch?v=')[1]
+      ) & (
+        getLink = getLink.slice(0, 11)
+      )
+      return getLink
     }
   }
 };
 </script>
 
 <style scoped lang="sass">
-#inputbar
-  padding: .5rem 1rem
-
-#link_input
-  border: 1px solid #aaa
-  border-radius: 4px
-  margin: 0 .5rem
 </style>

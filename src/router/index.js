@@ -1,27 +1,30 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Main from '../views/main.vue'
+import vtuberList from '../views/vtuberList.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/youtube-wall/',
     name: 'Home',
-    component: Home
+    component: Main
   },
-  // {
-    // path: '/about',
-    // name: 'About',
-    // // route level code-splitting
-    // // this generates a separate chunk (about.[hash].js) for this route
-    // // which is lazy-loaded when the route is visited.
-    // component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  // }
+  {
+    path: '/youtube-wall/list',
+    name: 'Vtuber List',
+    component: vtuberList
+  },
+  { path: '*',
+    redirect: '/youtube-wall/'
+  },
 ]
 
 const router = new VueRouter({
-  routes
+  routes,
+  mode: 'history',
+  hash: false,
 })
 
 export default router
