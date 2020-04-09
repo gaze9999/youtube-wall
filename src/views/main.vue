@@ -29,5 +29,6 @@ export default {
 .frames
   min-height: calc( 100vh - 64px )
   display: flex
-  flex-flow: row wrap  
+  flex-flow: row wrap
+  position: relative
 </style>

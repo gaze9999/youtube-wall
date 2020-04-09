@@ -1,7 +1,7 @@
 <template lang="pug">
 v-app
-  v-app-bar(app, color='primary', dark, flat)
-    v-toolbar-title Youtube 電視牆
+  v-app-bar(app, dark)
+    v-toolbar-title.font-weight-bold Youtube 電視牆
     v-spacer
     inputbar
     v-spacer
