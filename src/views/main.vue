@@ -1,12 +1,11 @@
 <template lang="pug">
-v-container.frames(fluid, fill-height)
-  v-row
-    videoFrame(v-for='link in videoLinks', :key='link.index', :videoLink='link' style="flex-basis: 50%")
+v-container.frames(fluid)
+  videoFrame(v-for='link in videoLinks', :key='link.index', :videoLink='link' style="flex-basis: 50%")
 </template>
 
 <script>
 export default {
-  name: 'Main',
+  name: 'frame-container',
   components: {
     videoFrame: () => import('@/components/videoFrame.vue')
   },
@@ -22,6 +21,13 @@ export default {
   },
   created() {
     this.videoLinks = this.$store.state.videoStore
-  }
+  },
 }
 </script>
+
+<style scoped lang="sass">
+.frames
+  min-height: calc( 100vh - 64px )
+  display: flex
+  flex-flow: row wrap  
+</style>

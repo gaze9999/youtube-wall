@@ -31,6 +31,11 @@ export default new Vuex.Store({
       }
       state.linkCount = state.videoStore.length
     },
+    removeAllLinks(state){
+      state.videoStore.splice(0, state.linkCount)
+      state.linkIndex = 0
+      state.linkCount = 0
+    },
     updateLinks(state, payload) {
       state.videoStore = payload
       state.linkIndex = state.videoStore[0].index + 1

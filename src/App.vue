@@ -9,29 +9,25 @@ v-app
       v-icon mdi-format-list-bulleted-square
     v-btn.mx-1(icon='', to='/youtube-wall/')
       v-icon mdi-television
+    removeall
   v-content
-    router-view(v-on:updateNumber="showHeight")
-  toastr(ref='toastr')
+    router-view
 </template>
 
 <script>
 export default {
   name: "App",
   components: {
+    removeall: () => import("@/components/removeAll.vue"),
     inputbar: () => import("@/components/inputbar.vue"),
     toastr: () => import("vue-toastr")
   },
   created() {
-    if (localStorage.videoLocalStore) {
+    if (localStorage.videoLocalStore !== '[]') {
       this.$store.commit('updateLinks', JSON.parse(localStorage.videoLocalStore))
     } else {
       this.$store.state.videoStore.splice(0)
       localStorage.videoLocalStore = '[]'
-    }
-  },
-  methods: {
-    showHeight() {
-      console.log(this.videoCount)
     }
   }
 };
