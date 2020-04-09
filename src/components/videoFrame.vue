@@ -1,7 +1,8 @@
 <template lang="pug">
 v-col.youtube_frame
-  v-btn(icon='', @click='remove', color='white', absolute, large, right)
-    v-icon mdi-close-circle
+  v-hover(v-slot:default='{ hover }', close-delay='400')
+    v-btn(icon='', @click='remove', color='white', absolute, large, right, :style='`opacity: ${hover ? 1 : .2}`')
+      v-icon mdi-close-circle
   iframe(type='text/html', :src='vLinkInput', allowfullscreen, absolute, width='100%', height='100%')
 </template>
 
