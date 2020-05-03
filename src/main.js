@@ -2,8 +2,10 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+
 import Toastr from 'vue-toastr';
-import vuetify from './plugins/vuetify';
+import vuetify from './plugins/vuetify'
+import VueYoutube from 'vue-youtube'
 
 const toastrConfig = {
   defaultTimeout: 2000,
@@ -11,7 +13,8 @@ const toastrConfig = {
   defaultPosition: "toast-bottom-right",
   defaultCloseOnHover: false,
 };
-Vue.use(Toastr, toastrConfig);
+Vue.use(Toastr, toastrConfig)
+Vue.use(VueYoutube)
 Vue.config.productionTip = false
 
 new Vue({
