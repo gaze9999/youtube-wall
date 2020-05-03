@@ -52,7 +52,7 @@ export default {
 .youtube_frame
   position: relative
   flex: 0 50%
-  min-height: 40vh
+  min-height: 50vh
   max-height: 50%
   &:only-child
     flex: 1
