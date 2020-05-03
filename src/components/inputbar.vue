@@ -10,7 +10,7 @@ export default {
   props: {
     videoLink: {
       index: Number,
-      link:String
+      link: String
       },
     linkIndex: Number,
   },
