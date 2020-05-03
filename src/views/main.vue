@@ -1,6 +1,7 @@
 <template lang="pug">
 v-container.frames(fluid)
-  videoFrame(v-for='link in videoLinks', :key='link.index', :videoLink='link' style="flex-basis: 50%")
+  v-row
+    videoFrame(v-for='link in videoLinks', :key='link.index', :videoLink='link')
 </template>
 
 <script>
@@ -27,7 +28,7 @@ export default {
 
 <style scoped lang="sass">
 .frames
-  min-height: calc( 100vh - 64px )
+  min-height: calc(100vh - 64px)
   display: flex
   flex-flow: row wrap
   position: relative

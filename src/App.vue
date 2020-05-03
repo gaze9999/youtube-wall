@@ -40,4 +40,7 @@ export default {
   -moz-osx-font-smoothing: grayscale
   color: #2c3e50
   background-color: #666
+  ::selection
+    background-color: #f79c6b
+    color: #fff
 </style>
