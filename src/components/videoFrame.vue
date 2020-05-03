@@ -25,8 +25,7 @@ export default {
   },
   computed: {
     vLinkInput() {
-      var linkEmbed = `https://www.youtube.com/embed/${this.videoLink.videoId}?autoplay=1`
-      return linkEmbed
+      return `https://www.youtube.com/embed/${this.videoLink.videoId}?autoplay=1`
     },
     updateHeight() {
       return this.heightSet
@@ -52,7 +51,12 @@ export default {
 <style scoped lang="sass">
 .youtube_frame
   position: relative
-
+  flex: 0 50%
+  min-height: 40vh
+  max-height: 50%
+  &:only-child
+    flex: 1
+    max-height: 100%
 iframe
   border: none
   background: #ccc
