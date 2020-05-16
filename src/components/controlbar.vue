@@ -57,7 +57,7 @@ export default {
     mutedControl() {
       this.muted = !this.muted
       this.$store.state.linkStore.muted = this.muted
-      this.playing ? this.$toastr.i('全部靜音') : this.$toastr.i('取消全部靜音')
+      this.muted ? this.$toastr.i('全部靜音') : this.$toastr.i('取消全部靜音')
     }
   },
   updated() {
