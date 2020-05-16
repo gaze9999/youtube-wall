@@ -25,7 +25,6 @@ export default {
     }
   },
   updated() {
-    this.videoCount = this.$store.state.videoStore.length
     this.$log.debug('videoLinks: ', this.videoLinks)
     this.$log.debug('videoCount: ', this.$store.state.videoStore.length)
   },

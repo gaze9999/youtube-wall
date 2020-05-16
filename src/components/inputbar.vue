@@ -7,15 +7,12 @@ v-row#inputbar(align-center)
 <script>
 export default {
   name: 'g-input-bar',
-  props: {
-    videoLink: {
-      index: Number,
-      link: String
-      },
-    linkIndex: Number,
-  },
   data() {
     return {
+      videoLink: {
+        index: Number,
+        link: String
+      },
       inputLink: '',
     };
   },
