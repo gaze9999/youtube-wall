@@ -47,6 +47,8 @@ const LINK_STORE = {
     },
     updateLinks(state) {
       state.videoStore = JSON.parse(localStorage.videoLocalStore)
+      state.linkIndex = state.videoStore[0].index + 1
+      state.linkCount = state.videoStore.length
     },
     removeLink(state, payload) {
       state.videoStore.forEach(function(storeItem, storeIndex, storeArray) {
