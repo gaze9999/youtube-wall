@@ -11,7 +11,6 @@ export default new Vuex.Store({
     }],
     linkCount: 0,
     linkIndex: 0,
-    videoWidth: String
   },
   mutations: {
     addLink(state, payload) {
@@ -19,11 +18,14 @@ export default new Vuex.Store({
       state.linkIndex = state.videoStore[0].index + 1
       state.linkCount = state.videoStore.length
     },
+    updateLinks(state) {
+      state.videoStore = JSON.parse(localStorage.videoLocalStore)
+    },
     removeLink(state, payload) {
       state.videoStore.forEach(function(storeItem, storeIndex, storeArray) {
         if (storeItem.index === payload.index) { storeArray.splice(storeIndex, 1) }
       })
-      if (state.videoStore.length == 0) {
+      if (state.videoStore.length === 0) {
         localStorage.videoLocalStore = []
         state.linkIndex = 0
       } else {
@@ -31,21 +33,26 @@ export default new Vuex.Store({
       }
       state.linkCount = state.videoStore.length
     },
-    removeAllLinks(state){
+    removeAllLinks(state) {
       state.videoStore.splice(0, state.linkCount)
       state.linkIndex = 0
       state.linkCount = 0
     },
-    updateLinks(state, payload) {
-      state.videoStore = payload
-      state.linkIndex = state.videoStore[0].index + 1
-      state.linkCount = state.videoStore.length
-    },
-    updateWidth(state, payload) {
-      state.videoWidth = payload * 0.5625 + 'px'
-    }
   },
   actions: {
+    updateLinks({ commit, state }, payload) {
+      if (payload) {
+        commit('addLink', payload)
+        localStorage.videoLocalStore = JSON.stringify(state.videoStore)
+      } else {
+        if (localStorage.videoLocalStore !== '[]' && localStorage.videoLocalStore) {
+          commit('updateLinks')
+        } else {
+          state.videoStore.splice(0)
+          localStorage.videoLocalStore = '[]'
+        }
+      }
+    }
   },
   modules: {
   }
