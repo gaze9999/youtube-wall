@@ -1,6 +1,6 @@
 <template lang="pug">
 v-app
-  v-app-bar(app, dark)
+  v-app-bar(app dark)
     v-toolbar-title.font-weight-bold Youtube 電視牆
     v-spacer
       div
@@ -11,13 +11,13 @@ v-app
     div.btn_group
       v-tooltip(bottom) vtuber list
         template(v-slot:activator='{ on }')
-          v-btn(icon='', to='/youtube-wall/list', v-on='on')
+          v-btn(icon='' to='/youtube-wall/list' v-on='on' disabled)
             v-icon mdi-format-list-bulleted-square
       v-tooltip(bottom) youtube wall
         template(v-slot:activator='{ on }')
-          v-btn(icon='', to='/youtube-wall/', v-on='on')
+          v-btn(icon='' to='/youtube-wall/' v-on='on')
             v-icon mdi-television
-    v-btn(icon='')
+    v-btn(icon='' disabled)
       v-icon mdi-dots-vertical
   v-content
     router-view
@@ -53,7 +53,6 @@ export default {
   ::selection
     background-color: #f79c6b
     color: #fff
-  v-tooltip
   .btn_group
     > button, a
       margin-right: .5rem
