@@ -2,7 +2,7 @@
 div.mr-5.btn_group
   v-tooltip(bottom v-if='!chat') 聊天室
     template(v-slot:activator='{ on }')
-      v-btn(icon='' v-on='on' @click.native='showChat()')
+      v-btn(icon='' v-on='on' @click.native='showChat()' disabled)
         v-icon mdi-message-text
   v-tooltip(bottom v-if='chat') 聊天室
     template(v-slot:activator='{ on }')
