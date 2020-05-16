@@ -1,4 +1,4 @@
-<template lang="pug">
+<template lang='pug'>
 v-col.youtube_frame
   v-hover(v-slot:default='{ hover }', close-delay='400')
     v-btn(icon='', @click='remove', color='white', absolute, large, right, :style='`opacity: ${hover ? 1 : .2}`')
@@ -19,7 +19,7 @@ export default {
   },
   data() {
     return {
-      videoCount: this.$store.state.videoStore.length,
+      videoCount: this.$store.state.linkStore.videoStore.length,
     };
   },
   computed: {
@@ -35,15 +35,17 @@ export default {
   },
   methods: {
     remove() {
-      this.$store.commit('removeLink', this.videoLink)
-      localStorage.videoLocalStore = JSON.stringify(this.$store.state.videoStore)
-      this.$toastr.i("link removed");
+      this.$store.commit('linkStore/removeLink', this.videoLink)
     },
-  }
+  },
+  beforeDestroy() {
+    localStorage.videoLocalStore = JSON.stringify(this.$store.state.linkStore.videoStore)
+    this.$toastr.i('link removed');    
+  },
 }
 </script>
 
-<style scoped lang="sass">
+<style scoped lang='sass'>
 .youtube_frame
   position: relative
   flex: 0 50%

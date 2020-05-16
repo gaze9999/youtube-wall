@@ -3,7 +3,30 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+const MESSANGE_MODULE = {
+  namespaced: true,
+  state: {
+    snackbar: [{
+      level: String,
+      messange: String,
+    }],
+  },
+  mutations: {
+
+  },
+  actions: {
+    bindMessange(state, payload) {
+      state.level = 'normal'
+      state.messange = payload
+    }
+  },
+  getters: {
+
+  },
+}
+
+const LINK_STORE = {
+  namespaced: true,
   state: {
     videoStore: [{
       index: Number,
@@ -54,6 +77,14 @@ export default new Vuex.Store({
       }
     }
   },
+  getters: {
+
+  },
+}
+
+export default new Vuex.Store({
   modules: {
+    messanges: MESSANGE_MODULE,
+    linkStore: LINK_STORE,
   }
 })

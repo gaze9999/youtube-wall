@@ -20,10 +20,10 @@ export default {
     sendLink() {
       if (this.inputLink !== '') {
         const link = {
-          index: this.$store.state.linkIndex,
+          index: this.$store.state.linkStore.linkIndex,
           videoId: this.filterLink(this.inputLink)
         }
-        this.$store.dispatch('updateLinks', link)
+        this.$store.dispatch('linkStore/updateLinks', link)
         this.inputLink = ''
       } else {
         this.$toastr.e('link not input');
