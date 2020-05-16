@@ -5,16 +5,31 @@ import store from './store'
 
 import Toastr from 'vue-toastr';
 import vuetify from './plugins/vuetify'
+import VueLogger from 'vuejs-logger'
 import VueYoutube from 'vue-youtube'
+
+const isProduction = process.env.NODE_ENV === 'production'
 
 const toastrConfig = {
   defaultTimeout: 2000,
   defaultProgressBar: false,
   defaultPosition: "toast-bottom-right",
   defaultCloseOnHover: false,
-};
+}
+
+const vueLoggerOptions = {
+  isEnabled: true,
+  logLevel : isProduction ? 'error' : 'debug',
+  stringifyArguments : false,
+  showLogLevel : true,
+  showMethodName : true,
+  separator: '|',
+  showConsoleColors: true
+}
+
 Vue.use(Toastr, toastrConfig)
 Vue.use(VueYoutube)
+Vue.use(VueLogger, vueLoggerOptions)
 Vue.config.productionTip = false
 
 new Vue({
