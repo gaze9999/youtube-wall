@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: 'removeall',
+  name: 'g-remove-all',
   props: {
     videoStore: [{
       index: Number,

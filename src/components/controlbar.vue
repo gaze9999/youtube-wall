@@ -1,4 +1,4 @@
-<template lang="pug">
+<template lang='pug'>
 div.mr-5.btn_group
   v-btn(icon='')
     v-icon mdi-message-text
@@ -11,13 +11,13 @@ div.mr-5.btn_group
 
 <script>
 export default {
-  name: 'controlbar',
+  name: 'g-control-bar',
   components: {
-    'g-remove-all': () => import("@/components/removeAll.vue"),
+    'g-remove-all': () => import('@/components/removeAll.vue'),
   }
   
 }
 </script>
 
-<style scoped lang="sass">
+<style scoped lang='sass'>
 </style>
