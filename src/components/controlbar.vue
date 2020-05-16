@@ -11,7 +11,7 @@ div.mr-5.btn_group
 
   v-tooltip(bottom v-if='playing') 暫停
     template(v-slot:activator='{ on }')
-      v-btn(icon='' v-on='on' @click.native='playing = !playing')
+      v-btn(icon='' v-on='on' @click.native='playing = !playing' disabled)
         v-icon mdi-play-pause
   v-tooltip(bottom v-if='!playing') 播放
     template(v-slot:activator='{ on }')
@@ -20,7 +20,7 @@ div.mr-5.btn_group
 
   v-tooltip(bottom v-if='!muted') 靜音
     template(v-slot:activator='{ on }')
-      v-btn(icon='' v-on='on' @click.native='muted = !muted')
+      v-btn(icon='' v-on='on' @click.native='muted = !muted' disabled)
         v-icon mdi-volume-high
   v-tooltip(bottom v-if='muted') 恢復聲音
     template(v-slot:activator='{ on }')
