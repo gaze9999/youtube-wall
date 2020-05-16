@@ -6,7 +6,7 @@ v-row#inputbar(align-center)
 
 <script>
 export default {
-  name: 'inputbar',
+  name: 'g-input-bar',
   props: {
     videoLink: {
       index: Number,
@@ -17,19 +17,16 @@ export default {
   data() {
     return {
       inputLink: '',
-      updateLink: {},
     };
   },
   methods: {
     sendLink() {
       if (this.inputLink !== '') {
-        this.updateLink = {
+        const link = {
           index: this.$store.state.linkIndex,
           videoId: this.filterLink(this.inputLink)
-        };
-        this.$store.commit('addLink', this.updateLink)
-        this.$store.commit('updateWidth', this.$el.clientWidth)
-        localStorage.videoLocalStore = JSON.stringify(this.$store.state.videoStore)
+        }
+        this.$store.dispatch('updateLinks', link)
         this.inputLink = ''
       } else {
         this.$toastr.e('link not input');
@@ -38,7 +35,7 @@ export default {
     filterLink(link) {
       var getLink = ''
           // chatEmbed = `https://www.youtube.com/live_chat?v=${getLink}&embed_domain=gaze9999.github.io`
-      this.$log.debug('link', link)
+      this.$log.info('link: ', link)
       link = link.split('/')
       link[0] !== 'https:' ?
         (getLink = link[1]) :
