@@ -4,8 +4,18 @@ v-col.youtube_frame
     v-btn(icon='', @click='remove', color='white', absolute, large, right, :style='`opacity: ${hover ? 1 : .2}`')
       v-icon mdi-close-circle
   //- iframe(type='text/html', :src='vLinkInput', width='100%', height='100%')
-  youtube(:id='vLinkId' :video-id='videoLink.videoId' ref='youtube' width='100%' height='100%')
-  iframe.youtube_chat(v-if='this.$store.state.linkStore.chat' type='text/html' :src='vLinkChat')
+  youtube(:id='"player-" + vLinkId'
+          :video-id='videoLink.videoId'
+          ref='youtube'
+          width='100%'
+          height='100%'
+  )
+  iframe.youtube_chat(:id='"chat-" + vLinkId'
+                      v-if='this.$store.state.linkStore.chat'
+                      type='text/html'
+                      :src='vLinkChat'
+                      allowfullscreen
+  )
 </template>
 
 <script>
@@ -27,7 +37,7 @@ export default {
   },
   computed: {
     vLinkId() {
-      return `player-${this.videoLink.videoId}`
+      return this.videoLink.videoId
     },
     vLinkChat() {
       return this.chatEmbed
