@@ -1,20 +1,29 @@
 <template lang='pug'>
 v-col.youtube_frame
   v-hover(v-slot:default='{ hover }', close-delay='400')
-    v-btn(icon='', @click='remove', color='white', absolute, large, right, :style='`opacity: ${hover ? 1 : .2}`')
+    v-btn(v-if='vPlaying'
+          icon=''
+          @click='remove'
+          color='white'
+          absolute
+          large
+          right
+          :style='`opacity: ${hover ? 1 : .2}`'
+    )
       v-icon mdi-close-circle
-  //- iframe(type='text/html', :src='vLinkInput', width='100%', height='100%')
   youtube(:id='"player-" + vLinkId'
           :video-id='videoLink.videoId'
           ref='youtube'
           width='100%'
           height='100%'
+          @playing='playing'
   )
   iframe.youtube_chat(:id='"chat-" + vLinkId'
+                      :src='vLinkChat'
                       v-if='this.$store.state.linkStore.chat'
                       type='text/html'
-                      :src='vLinkChat'
                       allowfullscreen
+                      dark_theme='1'
   )
 </template>
 
@@ -31,8 +40,10 @@ export default {
   data() {
     return {
       videoCount: this.$store.state.linkStore.videoStore.length,
-      chatEmbed: `https://www.youtube.com/live_chat?v=${this.videoLink.videoId}&embed_domain=` + window.location.hostname,
+      chatEmbed: `https://www.youtube.com/live_chat?embed=1&v=${this.videoLink.videoId}&embed_domain=${window.location.hostname}`,
       chatStatus: this.$store.state.linkStore.chat,
+      // playingStatus: this.$store.state.linkStore.playing,
+      vPlaying: false,
     };
   },
   computed: {
@@ -45,13 +56,36 @@ export default {
     player() {
       return this.$refs.youtube.player
     },
+    playingStatus() {
+      return this.$store.state.linkStore.playing
+    },
+    mutedStatus() {
+      return this.$store.state.linkStore.muted
+    },
   },
   mounted() {
     this.player.playVideo()
   },
+  watch: {
+    playingStatus: function() {
+      this.controlPlaying()
+    },
+    mutedStatus: function() {
+      this.controlMuting()
+    },
+  },
   methods: {
     remove() {
       this.$store.commit('linkStore/removeLink', this.videoLink)
+    },
+    playing() {
+      this.vPlaying = this.$store.state.linkStore.playing
+    },
+    controlPlaying() {
+    this.playingStatus ? this.player.playVideo() : this.player.pauseVideo()
+    },
+    controlMuting() {
+    this.mutedStatus ? this.player.mute() : this.player.unMute()
     },
   },
   beforeDestroy() {
