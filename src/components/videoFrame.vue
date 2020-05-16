@@ -21,7 +21,7 @@ export default {
   data() {
     return {
       videoCount: this.$store.state.linkStore.videoStore.length,
-      chatEmbed: `https://www.youtube.com/live_chat?v=${this.videoLink.videoId}&embed_domain=https://gaze9999.github.io/youtube-wall/`,
+      chatEmbed: `https://www.youtube.com/live_chat?v=${this.videoLink.videoId}&embed_domain=` + window.location.hostname,
       chatStatus: this.$store.state.linkStore.chat,
     };
   },
@@ -64,4 +64,5 @@ export default {
 .youtube_chat
   max-width: 50%
   flex-basis: 50%
+  border: 0px
 </style>
