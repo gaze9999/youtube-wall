@@ -9,7 +9,7 @@ v-col.youtube_frame
 
 <script>
 export default {
-  name: 'videoframe',
+  name: 'g-video-frame',
   props: {
     videoLink: {
       index: Number,
@@ -20,8 +20,6 @@ export default {
   data() {
     return {
       videoCount: this.$store.state.videoStore.length,
-      widthSet: '',
-      heightSet: 0
     };
   },
   computed: {
@@ -31,21 +29,13 @@ export default {
     player() {
       return this.$refs.youtube.player
     },
-    updateHeight() {
-      return this.heightSet
-    }
   },
   mounted() {
-    this.$store.commit('updateWidth', this.$el.clientWidth)
-    this.widthSet = this.$el.clientWidth
-    this.heightSet = this.$store.state.videoWidth
     this.player.playVideo()
   },
   methods: {
     remove() {
       this.$store.commit('removeLink', this.videoLink)
-      this.$store.commit('updateWidth', this.$el.clientWidth)
-      this.heightSet = this.$store.state.videoWidth
       localStorage.videoLocalStore = JSON.stringify(this.$store.state.videoStore)
       this.$toastr.i("link removed");
     },
