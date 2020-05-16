@@ -11,14 +11,13 @@ v-app
     div.btn_group
       v-tooltip(bottom) vtuber 列表
         template(v-slot:activator='{ on }')
-          v-btn(icon='' to='/youtube-wall/list' v-on='on')
+          v-btn(icon='' to='/youtube-wall/list' v-on='on' disabled)
             v-icon mdi-format-list-bulleted-square
       v-tooltip(bottom) 電視牆
         template(v-slot:activator='{ on }')
           v-btn(icon='' to='/youtube-wall/' v-on='on')
             v-icon mdi-television
-    v-btn(icon='')
-      v-icon mdi-dots-vertical
+    g-main-menu
   v-content
     router-view
   //- g-snack-bar
@@ -32,6 +31,7 @@ export default {
     'g-control-bar': () => import("@/components/controlbar.vue"),
     'g-snack-bar': () => import("@/components/snackbar.vue"),
     'g-testing-bar': () => import("@/components/testingbar.vue"),
+    'g-main-menu': () => import("@/components/mainMenu.vue"),
     toastr: () => import("vue-toastr")
   },
   created() {
