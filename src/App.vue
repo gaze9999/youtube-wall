@@ -11,13 +11,13 @@ v-app
     div.btn_group
       v-tooltip(bottom) vtuber 列表
         template(v-slot:activator='{ on }')
-          v-btn(icon='' to='/youtube-wall/list' v-on='on' disabled)
+          v-btn(icon='' to='/youtube-wall/list' v-on='on')
             v-icon mdi-format-list-bulleted-square
       v-tooltip(bottom) 電視牆
         template(v-slot:activator='{ on }')
           v-btn(icon='' to='/youtube-wall/' v-on='on')
             v-icon mdi-television
-    v-btn(icon='' disabled)
+    v-btn(icon='')
       v-icon mdi-dots-vertical
   v-content
     router-view
