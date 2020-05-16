@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: 'removeall',
+  name: 'g-remove-all',
   props: {
     videoStore: [{
       index: Number,
@@ -31,8 +31,8 @@ export default {
   },
   methods: {
     removeAll() {
-      this.$store.commit('removeAllLinks')
-      localStorage.videoLocalStore = JSON.stringify(this.$store.state.videoStore)
+      this.$store.commit('linkStore/removeAllLinks')
+      localStorage.videoLocalStore = JSON.stringify(this.$store.state.linkStore.videoStore)
       this.$toastr.i('all links removed');
       this.dialog = false;
     }

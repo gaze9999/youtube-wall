@@ -1,4 +1,4 @@
-<template lang="pug">
+<template lang='pug'>
 v-col.youtube_frame
   v-hover(v-slot:default='{ hover }', close-delay='400')
     v-btn(icon='', @click='remove', color='white', absolute, large, right, :style='`opacity: ${hover ? 1 : .2}`')
@@ -9,7 +9,7 @@ v-col.youtube_frame
 
 <script>
 export default {
-  name: 'videoframe',
+  name: 'g-video-frame',
   props: {
     videoLink: {
       index: Number,
@@ -19,9 +19,7 @@ export default {
   },
   data() {
     return {
-      videoCount: this.$store.state.videoStore.length,
-      widthSet: '',
-      heightSet: 0
+      videoCount: this.$store.state.linkStore.videoStore.length,
     };
   },
   computed: {
@@ -31,29 +29,23 @@ export default {
     player() {
       return this.$refs.youtube.player
     },
-    updateHeight() {
-      return this.heightSet
-    }
   },
   mounted() {
-    this.$store.commit('updateWidth', this.$el.clientWidth)
-    this.widthSet = this.$el.clientWidth
-    this.heightSet = this.$store.state.videoWidth
     this.player.playVideo()
   },
   methods: {
     remove() {
-      this.$store.commit('removeLink', this.videoLink)
-      this.$store.commit('updateWidth', this.$el.clientWidth)
-      this.heightSet = this.$store.state.videoWidth
-      localStorage.videoLocalStore = JSON.stringify(this.$store.state.videoStore)
-      this.$toastr.i("link removed");
+      this.$store.commit('linkStore/removeLink', this.videoLink)
     },
-  }
+  },
+  beforeDestroy() {
+    localStorage.videoLocalStore = JSON.stringify(this.$store.state.linkStore.videoStore)
+    this.$toastr.i('link removed');    
+  },
 }
 </script>
 
-<style scoped lang="sass">
+<style scoped lang='sass'>
 .youtube_frame
   position: relative
   flex: 0 50%

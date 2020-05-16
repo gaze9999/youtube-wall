@@ -3,7 +3,7 @@ v-app
   v-app-bar(app dark)
     v-toolbar-title.font-weight-bold Youtube 電視牆
     v-spacer
-      div
+      g-testing-bar
     v-spacer
     g-input-bar
     v-spacer
@@ -21,6 +21,7 @@ v-app
       v-icon mdi-dots-vertical
   v-content
     router-view
+  g-snack-bar
 </template>
 
 <script>
@@ -29,16 +30,13 @@ export default {
   components: {
     'g-input-bar': () => import("@/components/inputbar.vue"),
     'g-control-bar': () => import("@/components/controlbar.vue"),
+    'g-snack-bar': () => import("@/components/snackbar.vue"),
+    'g-testing-bar': () => import("@/components/testingbar.vue"),
     toastr: () => import("vue-toastr")
   },
   created() {
-    if (localStorage.videoLocalStore) {
-      this.$store.commit('updateLinks', JSON.parse(localStorage.videoLocalStore))
-    } else {
-      this.$store.state.videoStore.splice(0)
-      localStorage.videoLocalStore = JSON.stringify('')
-    }
-    this.$log.info('storage', JSON.parse(localStorage.videoLocalStore))
+    this.$store.dispatch('linkStore/updateLinks')
+    this.$log.info('storage: ', JSON.parse(localStorage.videoLocalStore))
   }
 };
 </script>

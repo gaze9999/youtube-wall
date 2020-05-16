@@ -1,14 +1,14 @@
-<template lang="pug">
+<template lang='pug'>
 v-container.frames(fluid)
-  v-row
-    videoFrame(v-for='link in videoLinks', :key='link.index', :videoLink='link')
+  v-row(v-if='this.$store.state.linkStore.videoStore.length > 0')
+    g-video-frame(v-for='link in videoLinks', :key='link.index', :videoLink='link')
 </template>
 
 <script>
 export default {
-  name: 'frame-container',
+  name: 'g-frame-container',
   components: {
-    videoFrame: () => import('@/components/videoFrame.vue')
+    'g-video-frame': () => import('@/components/videoFrame.vue')
   },
   data() {
     return {
@@ -16,17 +16,20 @@ export default {
         index: Number,
         videoId: String
       }],
-      videoCount: this.$store.state.linkCount,
-      linkIndex: Number,
+      videoCount: this.$store.state.linkStore.videoStore.length,
     }
   },
   created() {
-    this.videoLinks = this.$store.state.videoStore
+    this.videoLinks = this.$store.state.linkStore.videoStore
+  },
+  updated() {
+    this.$log.debug('videoLinks: ', this.videoLinks)
+    this.$log.debug('videoCount: ', this.$store.state.linkStore.videoStore.length)
   },
 }
 </script>
 
-<style scoped lang="sass">
+<style scoped lang='sass'>
 .frames
   min-height: calc(100vh - 64px)
   display: flex
