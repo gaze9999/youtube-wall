@@ -12,11 +12,18 @@ export default {
   },
   data() {
     return {
-      snackbar: Boolean,
+      snackbar: false,
+      snackbarItem: {
+        level: this.$store.state.messanges.snackbar[0].level,
+        messange: this.$store.state.messanges.snackbar[0].messange,
+      },
+      messangeCount: this.$store.state.messanges.messangeCount
     }
   },
-  created() {
-    this.snackbar = false
+  computed() {
+    if (this.messangeCount > 0) {
+      this.snackbar = true
+    }
   },
 }
 </script>
