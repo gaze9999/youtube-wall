@@ -3,17 +3,17 @@ v-app
   v-app-bar(app, dark)
     v-toolbar-title.font-weight-bold Youtube 電視牆
     v-spacer
-      g-testing-bar
+      //- g-testing-bar
     v-spacer
     g-input-bar
     v-spacer
     g-control-bar
     div.btn_group
-      v-tooltip(bottom) vtuber list
+      v-tooltip(bottom) vtuber 列表
         template(v-slot:activator='{ on }')
           v-btn(icon='', to='/youtube-wall/list', v-on='on')
             v-icon mdi-format-list-bulleted-square
-      v-tooltip(bottom) youtube wall
+      v-tooltip(bottom) 電視牆
         template(v-slot:activator='{ on }')
           v-btn(icon='', to='/youtube-wall/', v-on='on')
             v-icon mdi-television
@@ -21,7 +21,7 @@ v-app
       v-icon mdi-dots-vertical
   v-content
     router-view
-  g-snack-bar
+  //- g-snack-bar
 </template>
 
 <script>
