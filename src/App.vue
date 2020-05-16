@@ -5,23 +5,18 @@ v-app
     v-spacer
       div
     v-spacer
-    inputbar
+    g-input-bar
     v-spacer
-    div.mr-5.btn_group
-      v-btn(icon='')
-        v-icon mdi-message-text
-      v-btn(icon='')
-        v-icon mdi-play
-      v-btn(icon='')
-        v-icon mdi-pause
-      v-btn(icon='')
-        v-icon mdi-volume-high
+    g-control-bar
     div.btn_group
-      v-btn(icon='', to='/youtube-wall/list')
-        v-icon mdi-format-list-bulleted-square
-      v-btn(icon='', to='/youtube-wall/')
-        v-icon mdi-television
-      removeall
+      v-tooltip(bottom) vtuber list
+        template(v-slot:activator='{ on }')
+          v-btn(icon='', to='/youtube-wall/list', v-on='on')
+            v-icon mdi-format-list-bulleted-square
+      v-tooltip(bottom) youtube wall
+        template(v-slot:activator='{ on }')
+          v-btn(icon='', to='/youtube-wall/', v-on='on')
+            v-icon mdi-television
     v-btn(icon='')
       v-icon mdi-dots-vertical
   v-content
@@ -30,10 +25,10 @@ v-app
 
 <script>
 export default {
-  name: "App",
+  name: 'App',
   components: {
-    removeall: () => import("@/components/removeAll.vue"),
-    inputbar: () => import("@/components/inputbar.vue"),
+    'g-input-bar': () => import("@/components/inputbar.vue"),
+    'g-control-bar': () => import("@/components/controlbar.vue"),
     toastr: () => import("vue-toastr")
   },
   created() {
@@ -57,6 +52,7 @@ export default {
   ::selection
     background-color: #f79c6b
     color: #fff
+  v-tooltip
   .btn_group
     > button, a
       margin-right: .5rem
