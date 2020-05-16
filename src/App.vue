@@ -32,13 +32,8 @@ export default {
     toastr: () => import("vue-toastr")
   },
   created() {
-    if (localStorage.videoLocalStore) {
-      this.$store.commit('updateLinks', JSON.parse(localStorage.videoLocalStore))
-    } else {
-      this.$store.state.videoStore.splice(0)
-      localStorage.videoLocalStore = JSON.stringify('')
-    }
-    this.$log.info('storage', JSON.parse(localStorage.videoLocalStore))
+    this.$store.dispatch('updateLinks')
+    this.$log.info('storage: ', JSON.parse(localStorage.videoLocalStore))
   }
 };
 </script>
