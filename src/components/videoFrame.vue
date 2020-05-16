@@ -82,7 +82,7 @@ export default {
       this.vPlaying = this.$store.state.linkStore.playing
     },
     controlPlaying() {
-    this.playingStatus ? this.player.playVideo() : this.player.pauseVideo()
+    this.playingStatus ? (this.player.seekTo('end'), this.player.playVideo()) : this.player.pauseVideo()
     },
     controlMuting() {
     this.mutedStatus ? this.player.mute() : this.player.unMute()
