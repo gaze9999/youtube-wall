@@ -3,13 +3,27 @@ v-app
   v-app-bar(app, dark)
     v-toolbar-title.font-weight-bold Youtube 電視牆
     v-spacer
+      div
+    v-spacer
     inputbar
     v-spacer
-    v-btn.mx-1(icon='', to='/youtube-wall/list')
-      v-icon mdi-format-list-bulleted-square
-    v-btn.mx-1(icon='', to='/youtube-wall/')
-      v-icon mdi-television
-    removeall
+    div.mr-5.btn_group
+      v-btn(icon='')
+        v-icon mdi-message-text
+      v-btn(icon='')
+        v-icon mdi-play
+      v-btn(icon='')
+        v-icon mdi-pause
+      v-btn(icon='')
+        v-icon mdi-volume-high
+    div.btn_group
+      v-btn(icon='', to='/youtube-wall/list')
+        v-icon mdi-format-list-bulleted-square
+      v-btn(icon='', to='/youtube-wall/')
+        v-icon mdi-television
+      removeall
+    v-btn(icon='')
+      v-icon mdi-dots-vertical
   v-content
     router-view
 </template>
@@ -43,4 +57,9 @@ export default {
   ::selection
     background-color: #f79c6b
     color: #fff
+  .btn_group
+    > button, a
+      margin-right: .5rem
+      &::nth-last-child(1)
+        margin-right: 0
 </style>
