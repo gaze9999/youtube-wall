@@ -7,18 +7,19 @@ const MESSANGE_MODULE = {
   namespaced: true,
   state: {
     snackbar: [{
-      level: String,
+      level: Number,
       messange: String,
     }],
+    messangeCount: 0
   },
   mutations: {
-
+    bindMessange(state, payload) {
+      state.snackbar = []
+      state.snackbar.unshift(payload)
+      state.messangeCount += 1
+    }
   },
   actions: {
-    bindMessange(state, payload) {
-      state.level = 'normal'
-      state.messange = payload
-    }
   },
   getters: {
 
@@ -34,6 +35,9 @@ const LINK_STORE = {
     }],
     linkCount: 0,
     linkIndex: 0,
+    chat: false,
+    playing: true,
+    muted: false,
   },
   mutations: {
     addLink(state, payload) {
