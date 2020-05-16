@@ -3,7 +3,7 @@ v-app
   v-app-bar(app dark)
     v-toolbar-title.font-weight-bold Youtube 電視牆
     v-spacer
-      g-testing-bar
+      //- g-testing-bar
     v-spacer
     g-input-bar
     v-spacer
