@@ -1,7 +1,7 @@
 <template lang='pug'>
 v-row#inputbar(align-center)
   v-text-field(v-model.trim='inputLink', placeholder='輸入網址', hide-details, @keyup.enter.native='sendLink')
-  v-btn.mx-2.font-weight-bold(@click='sendLink', light) 送出
+  v-btn.mx-2.font-weight-bold(@click.native='sendLink', light) 送出
 </template>
 
 <script>
@@ -31,7 +31,6 @@ export default {
     },
     filterLink(link) {
       var getLink = ''
-          // chatEmbed = `https://www.youtube.com/live_chat?v=${getLink}&embed_domain=gaze9999.github.io`
       this.$log.info('link: ', link)
       link = link.split('/')
       link[0] !== 'https:' ?
