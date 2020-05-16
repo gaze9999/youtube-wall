@@ -38,7 +38,7 @@ export default {
     filterLink(link) {
       var getLink = ''
           // chatEmbed = `https://www.youtube.com/live_chat?v=${getLink}&embed_domain=gaze9999.github.io`
-      console.log(link('youtube'))
+      this.$log.debug('link', link)
       link = link.split('/')
       link[0] !== 'https:' ?
         (getLink = link[1]) :
