@@ -51,10 +51,13 @@ export default {
     playControl() {
       this.playing = !this.playing
       this.$store.state.linkStore.playing = this.playing
+      this.playing ? this.$toastr.i('全部播放') : this.$toastr.i('全部暫停')
+      
     },
     mutedControl() {
       this.muted = !this.muted
       this.$store.state.linkStore.muted = this.muted
+      this.playing ? this.$toastr.i('全部靜音') : this.$toastr.i('取消全部靜音')
     }
   },
   updated() {

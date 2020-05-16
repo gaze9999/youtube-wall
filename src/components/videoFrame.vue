@@ -90,7 +90,7 @@ export default {
   },
   beforeDestroy() {
     localStorage.videoLocalStore = JSON.stringify(this.$store.state.linkStore.videoStore)
-    this.$toastr.i('link removed');    
+    this.$toastr.i('影片刪除');    
   },
 }
 </script>

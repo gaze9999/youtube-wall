@@ -33,7 +33,7 @@ export default {
     removeAll() {
       this.$store.commit('linkStore/removeAllLinks')
       localStorage.videoLocalStore = JSON.stringify(this.$store.state.linkStore.videoStore)
-      this.$toastr.i('all links removed');
+      this.$toastr.i('全部影片都刪除了!');
       this.dialog = false;
     }
   }
