@@ -1,8 +1,7 @@
 <template lang='pug'>
 v-col.youtube_frame
   v-hover(v-slot:default='{ hover }', close-delay='400')
-    v-btn(v-if='vPlaying'
-          icon=''
+    v-btn(icon=''
           @click='remove'
           color='white'
           absolute
@@ -42,8 +41,6 @@ export default {
       videoCount: this.$store.state.linkStore.videoStore.length,
       chatEmbed: `https://www.youtube.com/live_chat?embed=1&v=${this.videoLink.videoId}&embed_domain=${window.location.hostname}`,
       chatStatus: this.$store.state.linkStore.chat,
-      // playingStatus: this.$store.state.linkStore.playing,
-      vPlaying: false,
     };
   },
   computed: {
@@ -79,7 +76,7 @@ export default {
       this.$store.commit('linkStore/removeLink', this.videoLink)
     },
     playing() {
-      this.vPlaying = this.$store.state.linkStore.playing
+      // this.vPlaying = this.$store.state.linkStore.playing
     },
     controlPlaying() {
     this.playingStatus ? (this.player.seekTo('end'), this.player.playVideo()) : this.player.pauseVideo()
