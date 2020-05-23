@@ -21,6 +21,19 @@ export default {
   },
   created() {
     this.videoLinks = this.$store.state.linkStore.videoStore
+    this.$log.debug('weburl: ', window.location.href)
+    this.$log.debug('params: ', this.$route.query.link)
+    if (this.$route.query.link) {
+      const paramLinks = this.$route.query.link.split(',')
+      paramLinks.forEach(element => {
+        const link = {
+          index: this.$store.state.linkStore.linkIndex,
+          videoId: element,
+        }
+        this.$store.dispatch('linkStore/updateLinks', link)
+      })
+    this.$router.replace('')
+    }
   },
   updated() {
     this.$log.debug('videoLinks: ', this.videoLinks)
