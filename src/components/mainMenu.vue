@@ -5,8 +5,8 @@ v-menu(offset-y
       disabled
 )
   template(v-slot:activator='{ on }')
-    v-btn(icon='' v-on='on')
-      v-icon mdi-dots-vertical
+    v-btn(icon='' small v-on='on')
+      v-icon(small) mdi-dots-vertical
   v-list(dark)
     v-list-item(v-for='(item, index) in items'
                 :key='index'

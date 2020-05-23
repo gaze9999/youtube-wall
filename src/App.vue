@@ -1,6 +1,6 @@
 <template lang="pug">
 v-app
-  v-app-bar(app dark)
+  v-app-bar(app dark dense)
     v-toolbar-title.font-weight-bold Youtube 電視牆
     v-spacer
       //- g-testing-bar
@@ -11,12 +11,12 @@ v-app
     div.btn_group
       v-tooltip(bottom) vtuber 列表
         template(v-slot:activator='{ on }')
-          v-btn(icon='' to='/youtube-wall/list' v-on='on' disabled)
-            v-icon mdi-format-list-bulleted-square
+          v-btn(icon='' small to='/youtube-wall/list' v-on='on' disabled)
+            v-icon(small) mdi-format-list-bulleted-square
       v-tooltip(bottom) 電視牆
         template(v-slot:activator='{ on }')
-          v-btn(icon='' to='/youtube-wall/' v-on='on')
-            v-icon mdi-television
+          v-btn(icon='' small to='/youtube-wall/' v-on='on')
+            v-icon(small) mdi-television
     g-main-menu
   v-content
     router-view

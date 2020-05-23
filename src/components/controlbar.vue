@@ -1,55 +1,61 @@
 <template lang='pug'>
-div.mr-5.btn_group
-  v-tooltip(bottom v-if='!chat') 聊天室
-    template(v-slot:activator='{ on }')
-      v-btn(icon='' v-on='on' @click.stop='showChat()' disabled)
-        v-icon mdi-message-text
-  v-tooltip(bottom v-if='chat') 聊天室
-    template(v-slot:activator='{ on }')
-      v-btn(icon='' v-on='on' color='info' @click.stop='showChat()')
-        v-icon mdi-message-text
+div.pr-2.mr-2.d-flex#control_bar
+  v-btn(icon='' small @click.stop='controlDisplay = !controlDisplay')
+    v-icon(small v-if='!controlDisplay') mdi-chevron-left
+    v-icon(small v-if='controlDisplay') mdi-chevron-right
+  v-scroll-x-transition
+    div.btn_group(v-if='controlDisplay')
+      v-tooltip(bottom v-if='!chat') 聊天室
+        template(v-slot:activator='{ on }')
+          v-btn(icon='' small v-on='on' @click.stop='showChat()' disabled)
+            v-icon(small) mdi-message-text
+      v-tooltip(bottom v-if='chat') 聊天室
+        template(v-slot:activator='{ on }')
+          v-btn(icon='' small v-on='on' color='info' @click.stop='showChat()')
+            v-icon(small) mdi-message-text
 
-  v-tooltip(bottom v-if='playing') 暫停
-    template(v-slot:activator='{ on }')
-      v-btn(icon='' v-on='on' @click.stop='playControl()')
-        v-icon mdi-play-pause
-  v-tooltip(bottom v-if='!playing') 播放
-    template(v-slot:activator='{ on }')
-      v-btn(icon='' v-on='on' color='info' @click.stop='playControl()')
-        v-icon mdi-play
+      v-tooltip(bottom v-if='playing') 暫停
+        template(v-slot:activator='{ on }')
+          v-btn(icon='' small v-on='on' @click.stop='playControl()')
+            v-icon(small) mdi-play-pause
+      v-tooltip(bottom v-if='!playing') 播放
+        template(v-slot:activator='{ on }')
+          v-btn(icon='' small v-on='on' color='info' @click.stop='playControl()')
+            v-icon(small) mdi-play
 
-  v-tooltip(bottom v-if='!muted') 靜音
-    template(v-slot:activator='{ on }')
-      v-btn(icon='' v-on='on' @click.stop='mutedControl')
-        v-icon mdi-volume-high
-  v-tooltip(bottom v-if='muted') 恢復聲音
-    template(v-slot:activator='{ on }')
-      v-btn(icon='' v-on='on' color='info' @click.stop='mutedControl')
-        v-icon mdi-volume-mute
+      v-tooltip(bottom v-if='!muted') 靜音
+        template(v-slot:activator='{ on }')
+          v-btn(icon='' small v-on='on' @click.stop='mutedControl')
+            v-icon(small) mdi-volume-high
+      v-tooltip(bottom v-if='muted') 恢復聲音
+        template(v-slot:activator='{ on }')
+          v-btn(icon='' small v-on='on' color='info' @click.stop='mutedControl')
+            v-icon(small) mdi-volume-mute
 
-  v-tooltip(bottom v-if='linkCount > 0') 分享
-    template(v-slot:activator='{ on }')
-      v-btn(icon='' v-on='on' @click.stop='share()')
-        v-icon mdi-share-variant
-  v-tooltip(bottom v-if='!linkCount > 0') 分享
-    template(v-slot:activator='{ on }')
-      v-btn(icon='' v-on='on' @click.stop='share()' disabled)
-        v-icon mdi-share-variant
+      v-tooltip(bottom v-if='linkCount > 0') 分享
+        template(v-slot:activator='{ on }')
+          v-btn(icon='' small v-on='on' @click.stop='share()')
+            v-icon(small) mdi-share-variant
+      v-tooltip(bottom v-if='!linkCount > 0') 分享
+        template(v-slot:activator='{ on }')
+          v-btn(icon='' small v-on='on' @click.stop='share()' disabled)
+            v-icon(small) mdi-share-variant
 
-  v-dialog(v-model='shareDialog' max-width='500' transition='dialog-transition')
-    v-card.text-center(v-if='shareDialog')
-      v-card-title.headline.grey.lighten-2(primary-title) 分享連結
-      v-input.share_links(:messages='linksListDisplay' readonly)
-      h4 按鈕開發中，請先手動複製
-      v-card-actions
-        v-spacer
-          v-btn(color='info'
-                disabled
-                @click.stop='copyLinks'
-                v-clipboard:error='onError'
-          ) 複製連結
-            v-icon.ml-3 mdi-share-variant
-  g-remove-all
+      v-dialog(v-model='shareDialog' max-width='500' transition='dialog-transition')
+        v-card.text-center(v-if='shareDialog')
+          v-card-title.headline.grey.lighten-2(primary-title) 分享連結
+          v-input.share_links(:messages='linksListDisplay' readonly)
+          h4 按鈕開發中，請先手動複製
+          v-card-actions
+            v-spacer
+              v-btn(color='info'
+                    small
+                    disabled
+                    @click.stop='copyLinks'
+                    v-clipboard:error='onError'
+              ) 複製連結
+                v-icon.ml-3(small) mdi-share-variant
+      g-remove-all
 </template>
 
 <script>
@@ -66,6 +72,7 @@ export default {
       chatEmbed: String,
       shareDialog: false,
       linksList: [],
+      controlDisplay: false,
     }
   },
   methods: {
@@ -121,6 +128,8 @@ export default {
 </script>
 
 <style scoped lang='sass'>
+#control_bar
+  // border-right: 1px solid #aaa
 .share_links
   margin: 2rem 1rem
   // border-radius: 4px
