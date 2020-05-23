@@ -22,7 +22,7 @@ export default {
     }],
     linkCount: Number,
     linkIndex: Number,
-    videoWidth: String    
+    videoWidth: String
   },
   data () {
     return {
@@ -33,13 +33,17 @@ export default {
     removeAll() {
       this.$store.commit('linkStore/removeAllLinks')
       localStorage.videoLocalStore = JSON.stringify(this.$store.state.linkStore.videoStore)
-      this.$toastr.i('全部影片都刪除了!')
-      this.dialog = false;
+      this.dialog = false
+      const snackbarItem = {
+        level: 1,
+        messange: '全部影片都刪除了!'
+      }
+      this.$store.commit('messanges/bindMessange', snackbarItem)
     }
   }
 };
 </script>
 
 <style scoped lang='sass'>
-  
+
 </style>

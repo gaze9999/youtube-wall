@@ -6,7 +6,11 @@ Vue.use(Vuex)
 const MESSANGE_MODULE = {
   namespaced: true,
   state: {
-    snackbar: [{
+    snackbar: {
+      level: Number,
+      messange: String,
+    },
+    snackbars: [{
       level: Number,
       messange: String,
     }],
@@ -14,8 +18,7 @@ const MESSANGE_MODULE = {
   },
   mutations: {
     bindMessange(state, payload) {
-      state.snackbar = []
-      state.snackbar.unshift(payload)
+      state.snackbar = payload
       state.messangeCount += 1
     }
   },

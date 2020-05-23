@@ -3,8 +3,8 @@ v-app
   v-app-bar(app dark dense)
     v-toolbar-title.font-weight-bold Youtube 電視牆
     v-spacer
-      //- g-testing-bar
-    v-spacer
+    //-   g-testing-bar
+    //- v-spacer
     g-input-bar
     v-spacer
     g-control-bar
@@ -20,7 +20,7 @@ v-app
     g-main-menu
   v-content
     router-view
-  //- g-snack-bar
+  g-snack-bar
 </template>
 
 <script>
@@ -32,7 +32,6 @@ export default {
     'g-snack-bar': () => import("@/components/snackbar.vue"),
     'g-testing-bar': () => import("@/components/testingbar.vue"),
     'g-main-menu': () => import("@/components/mainMenu.vue"),
-    toastr: () => import("vue-toastr")
   },
   created() {
     this.$store.dispatch('linkStore/updateLinks')

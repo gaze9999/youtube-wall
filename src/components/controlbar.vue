@@ -83,13 +83,20 @@ export default {
     playControl() {
       this.playing = !this.playing
       this.$store.state.linkStore.playing = this.playing
-      this.playing ? this.$toastr.i('全部播放') : this.$toastr.i('全部暫停')
-
+      const snackbarItem = {
+        level: 1,
+        messange: this.playing ? '全部播放' : '全部暫停'
+      }
+      this.$store.commit('messanges/bindMessange', snackbarItem)
     },
     mutedControl() {
       this.muted = !this.muted
       this.$store.state.linkStore.muted = this.muted
-      this.muted ? this.$toastr.i('全部靜音') : this.$toastr.i('取消全部靜音')
+      const snackbarItem = {
+        level: 1,
+        messange: this.muted ? '全部靜音' : '取消全部靜音'
+      }
+      this.$store.commit('messanges/bindMessange', snackbarItem)
     },
     share() {
       this.shareDialog = true
@@ -103,12 +110,20 @@ export default {
     copyLinks() {
       this.$log.debug('linksListDisplay: ', this.linksListDisplay)
       this.$copyText(this.linksListDisplay).then(() => {
-        this.$toastr.i('連結複製成功')
+        const snackbarItem = {
+          level: 1,
+          messange: '連結複製成功'
+        }
+        this.$store.commit('messanges/bindMessange', snackbarItem)
         this.shareDialog = false
       })
     },
     onError() {
-      this.$toastr.e('連結複製失敗')
+      const snackbarItem = {
+        level: 1,
+        messange: '連結複製失敗'
+      }
+      this.$store.commit('messanges/bindMessange', snackbarItem)
     },
   },
   computed: {
