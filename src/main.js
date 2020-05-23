@@ -7,6 +7,7 @@ import Toastr from 'vue-toastr';
 import vuetify from './plugins/vuetify'
 import VueLogger from 'vuejs-logger'
 import VueYoutube from 'vue-youtube'
+import VueClipboard from 'vue-clipboard2'
 
 const isProduction = process.env.NODE_ENV === 'production'
 
@@ -27,9 +28,10 @@ const vueLoggerOptions = {
   showConsoleColors: true
 }
 
+Vue.use(VueLogger, vueLoggerOptions)
 Vue.use(Toastr, toastrConfig)
 Vue.use(VueYoutube)
-Vue.use(VueLogger, vueLoggerOptions)
+Vue.use(VueClipboard)
 Vue.config.productionTip = false
 
 new Vue({
