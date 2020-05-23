@@ -8,6 +8,7 @@ import vuetify from './plugins/vuetify'
 import VueLogger from 'vuejs-logger'
 import VueYoutube from 'vue-youtube'
 import VueClipboard from 'vue-clipboard2'
+import VueGtm from 'vue-gtm'
 
 const isProduction = process.env.NODE_ENV === 'production'
 
@@ -27,6 +28,12 @@ const vueLoggerOptions = {
   separator: '|',
   showConsoleColors: true
 }
+
+Vue.use(VueGtm, {
+  id: 'GTM-MMCLTMJ',
+  enabled: true,
+  debug: false,
+});
 
 Vue.use(VueLogger, vueLoggerOptions)
 Vue.use(Toastr, toastrConfig)

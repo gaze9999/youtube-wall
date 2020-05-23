@@ -26,6 +26,7 @@ div.mr-5.btn_group
     template(v-slot:activator='{ on }')
       v-btn(icon='' v-on='on' color='info' @click.native='mutedControl')
         v-icon mdi-volume-mute
+
   v-tooltip(bottom v-if='linkCount > 0') 分享
     template(v-slot:activator='{ on }')
       v-btn(icon='' v-on='on' @click.native='share()')
@@ -34,6 +35,7 @@ div.mr-5.btn_group
     template(v-slot:activator='{ on }')
       v-btn(icon='' v-on='on' @click.native='share()' disabled)
         v-icon mdi-share-variant
+
   v-dialog(v-model='shareDialog' max-width='500' transition='dialog-transition')
     v-card.text-center(v-if='shareDialog')
       v-card-title.headline.grey.lighten-2(primary-title) 分享連結
@@ -86,7 +88,7 @@ export default {
       this.shareDialog = true
       this.linksList = []
       this.$log.debug('store', this.$store.state.linkStore.videoStore)
-      this.$store.state.linkStore.videoStore.forEach(element => {        
+      this.$store.state.linkStore.videoStore.forEach(element => {
         this.linksList.push(element.videoId)
       })
       this.$log.debug('linksList: ', this.linksList)
@@ -105,7 +107,7 @@ export default {
   computed: {
     linksListDisplay() {
       return `${window.location.href}?link=${this.linksList.join(',')}`
-    }, 
+    },
     linkCount() {
       return this.$store.state.linkStore.linkCount
     },
