@@ -11,7 +11,7 @@ v-menu(offset-y
     v-list-item(v-for='(item, index) in items'
                 :key='index'
                 dark
-                @click=''
+                @click.stop=''
                 disabled
     )
       v-list-item-title {{ item.title }}

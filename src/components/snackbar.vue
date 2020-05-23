@@ -1,6 +1,6 @@
 <template lang='pug'>
 v-snackbar(v-model='snackbar' snackbarText) {{ messange }}
-  v-btn(icon='' color='red' @click.native='snackbar = false')
+  v-btn(icon='' color='red' @click.stop='snackbar = false')
     v-icon mdi-close
 </template>
 

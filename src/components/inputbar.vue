@@ -1,7 +1,7 @@
 <template lang='pug'>
 v-row#inputbar(align-center)
   v-text-field(v-model.trim='inputLink', placeholder='輸入網址', hide-details, @keyup.enter.native='sendLink')
-  v-btn.mx-2.font-weight-bold(@click.native='sendLink', light) 送出
+  v-btn.mx-2.font-weight-bold(@click.stop='sendLink', light) 送出
 </template>
 
 <script>

@@ -2,7 +2,7 @@
 v-col.youtube_frame
   v-hover(v-slot:default='{ hover }', close-delay='400')
     v-btn(icon=''
-          @click='remove'
+          @click.stop='remove'
           color='white'
           absolute
           large

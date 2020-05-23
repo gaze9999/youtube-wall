@@ -2,38 +2,38 @@
 div.mr-5.btn_group
   v-tooltip(bottom v-if='!chat') 聊天室
     template(v-slot:activator='{ on }')
-      v-btn(icon='' v-on='on' @click.native='showChat()' disabled)
+      v-btn(icon='' v-on='on' @click.stop='showChat()' disabled)
         v-icon mdi-message-text
   v-tooltip(bottom v-if='chat') 聊天室
     template(v-slot:activator='{ on }')
-      v-btn(icon='' v-on='on' color='info' @click.native='showChat()')
+      v-btn(icon='' v-on='on' color='info' @click.stop='showChat()')
         v-icon mdi-message-text
 
   v-tooltip(bottom v-if='playing') 暫停
     template(v-slot:activator='{ on }')
-      v-btn(icon='' v-on='on' @click.native='playControl()')
+      v-btn(icon='' v-on='on' @click.stop='playControl()')
         v-icon mdi-play-pause
   v-tooltip(bottom v-if='!playing') 播放
     template(v-slot:activator='{ on }')
-      v-btn(icon='' v-on='on' color='info' @click.native='playControl()')
+      v-btn(icon='' v-on='on' color='info' @click.stop='playControl()')
         v-icon mdi-play
 
   v-tooltip(bottom v-if='!muted') 靜音
     template(v-slot:activator='{ on }')
-      v-btn(icon='' v-on='on' @click.native='mutedControl')
+      v-btn(icon='' v-on='on' @click.stop='mutedControl')
         v-icon mdi-volume-high
   v-tooltip(bottom v-if='muted') 恢復聲音
     template(v-slot:activator='{ on }')
-      v-btn(icon='' v-on='on' color='info' @click.native='mutedControl')
+      v-btn(icon='' v-on='on' color='info' @click.stop='mutedControl')
         v-icon mdi-volume-mute
 
   v-tooltip(bottom v-if='linkCount > 0') 分享
     template(v-slot:activator='{ on }')
-      v-btn(icon='' v-on='on' @click.native='share()')
+      v-btn(icon='' v-on='on' @click.stop='share()')
         v-icon mdi-share-variant
   v-tooltip(bottom v-if='!linkCount > 0') 分享
     template(v-slot:activator='{ on }')
-      v-btn(icon='' v-on='on' @click.native='share()' disabled)
+      v-btn(icon='' v-on='on' @click.stop='share()' disabled)
         v-icon mdi-share-variant
 
   v-dialog(v-model='shareDialog' max-width='500' transition='dialog-transition')
@@ -45,7 +45,7 @@ div.mr-5.btn_group
         v-spacer
           v-btn(color='info'
                 disabled
-                @click.native='copyLinks'
+                @click.stop='copyLinks'
                 v-clipboard:error='onError'
           ) 複製連結
             v-icon.ml-3 mdi-share-variant

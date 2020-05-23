@@ -1,6 +1,6 @@
 <template lang='pug'>
 div.ml-5.btn_group
-  v-btn(icon='' color='red' @click.native='sendMessange')
+  v-btn(icon='' color='red' @click.stop='sendMessange')
     v-icon mdi-alert
   span(v-if="this.$store.state.messanges.messangeCount > 0")
     | {{ this.$store.state.messanges.snackbar[0].messange }}

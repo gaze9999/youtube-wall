@@ -8,8 +8,8 @@
       v-card-text 確定要清除全部影片?
       v-card-actions
         v-spacer
-          v-btn.mx-3(color='info' @click='dialog = false') 不要
-          v-btn.mx-3(color='success' @click='removeAll') 好
+          v-btn.mx-3(color='info' @click.stop='dialog = false') 不要
+          v-btn.mx-3(color='success' @click.stop='removeAll') 好
 </template>
 
 <script>
