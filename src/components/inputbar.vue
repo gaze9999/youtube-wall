@@ -26,7 +26,7 @@ export default {
         this.$store.dispatch('linkStore/updateLinks', link)
         this.inputLink = ''
       } else {
-        this.$toastr.e('沒輸入連結');
+        this.$toastr.e('沒輸入連結')
       }
     },
     filterLink(link) {
