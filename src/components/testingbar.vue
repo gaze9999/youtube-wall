@@ -28,11 +28,11 @@ export default {
   },
   methods: {
     sendMessange() {
-      // this.$log.debug(this.$store.state.messanges.snackbar)
-      let snackbarItem = {level: 1, messange: this.$store.state.linkStore.videoStore[0].videoId}
+      let snackbarItem = {
+        level: 1,
+        messange: 'test'
+      }
       this.$store.commit('messanges/bindMessange', snackbarItem)
-      // this.$log.debug('snackbar store: ', this.$store.state.messanges.snackbar[0].messange)
-      // this.$log.debug('snackbar store: ', this.$store.state.messanges.messangeCount)
     }
   }
 }

@@ -26,7 +26,11 @@ export default {
         this.$store.dispatch('linkStore/updateLinks', link)
         this.inputLink = ''
       } else {
-        this.$toastr.e('沒輸入連結')
+        const snackbarItem = {
+          level: 1,
+          messange: '沒輸入連結'
+        }
+        this.$store.commit('messanges/bindMessange', snackbarItem)
       }
     },
     filterLink(link) {

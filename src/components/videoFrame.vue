@@ -88,7 +88,11 @@ export default {
   },
   beforeDestroy() {
     localStorage.videoLocalStore = JSON.stringify(this.$store.state.linkStore.videoStore)
-    this.$toastr.i('影片刪除');    
+    const snackbarItem = {
+        level: 1,
+        messange: `影片刪除, ID = ${this.vLinkId}`
+    }
+    this.$store.commit('messanges/bindMessange', snackbarItem)
   },
 }
 </script>
