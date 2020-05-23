@@ -26,7 +26,9 @@ export default {
         { title: '測試b' },
         { title: '測試c' },
         { title: '測試d' },
-      ]
+      ],
+      closeOnClick: true,
+      closeOnContentClick: true,
     }
   },
   methods: {
