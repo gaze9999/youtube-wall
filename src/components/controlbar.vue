@@ -26,9 +26,13 @@ div.mr-5.btn_group
     template(v-slot:activator='{ on }')
       v-btn(icon='' v-on='on' color='info' @click.native='mutedControl')
         v-icon mdi-volume-mute
-  v-tooltip(bottom) 分享
+  v-tooltip(bottom v-if='linkCount > 0') 分享
     template(v-slot:activator='{ on }')
       v-btn(icon='' v-on='on' @click.native='share()')
+        v-icon mdi-share-variant
+  v-tooltip(bottom v-if='!linkCount > 0') 分享
+    template(v-slot:activator='{ on }')
+      v-btn(icon='' v-on='on' @click.native='share()' disabled)
         v-icon mdi-share-variant
   v-dialog(v-model='shareDialog' max-width='500' transition='dialog-transition')
     v-card.text-center(v-if='shareDialog')
@@ -101,7 +105,10 @@ export default {
   computed: {
     linksListDisplay() {
       return `${window.location.href}?link=${this.linksList.join(',')}`
-    } 
+    }, 
+    linkCount() {
+      return this.$store.state.linkStore.linkCount
+    },
   },
   updated() {
     this.$log.debug('chat: ', this.$store.state.linkStore.chat)

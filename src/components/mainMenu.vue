@@ -1,7 +1,8 @@
 <template lang='pug'>
-v-menu( offset-y
-        :close-on-click="closeOnClick"
-        :close-on-content-click="closeOnContentClick"
+v-menu(offset-y
+      :close-on-click="closeOnClick"
+      :close-on-content-click="closeOnContentClick"
+      disabled
 )
   template(v-slot:activator='{ on }')
     v-btn(icon='' v-on='on')
