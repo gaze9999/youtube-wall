@@ -1,8 +1,10 @@
 <template lang='pug'>
   v-dialog(v-model='dialog' max-width='500' transition='dialog-transition')
     template(v-slot:activator='{ on }')
-      v-btn(icon='' small v-on='on' color='white')
-        v-icon(small) mdi-close
+      v-tooltip(bottom) 刪除全部
+        template(v-slot:activator='{ on }')
+          v-btn(icon='' small v-on='on' color='white' @click.stop='dialog = !dialog')
+            v-icon(small) mdi-close
     v-card.text-center
       v-card-title.headline.grey.lighten-2(primary-title) 清除全部
       v-card-text 確定要清除全部影片?
