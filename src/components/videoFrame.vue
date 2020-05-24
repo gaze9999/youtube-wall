@@ -20,7 +20,7 @@ v-scroll-y-transition
     )
     iframe.youtube_chat(:id='"chat-" + vLinkId'
                         :src='vLinkChat'
-                        v-if='this.$store.state.linkStore.chat'
+                        v-if='this.$store.state.appbar.controlbarStatus.chat'
                         type='text/html'
                         allowfullscreen
                         dark_theme='1'
@@ -41,7 +41,7 @@ export default {
     return {
       videoCount: this.$store.state.linkStore.videoStore.length,
       chatEmbed: `https://www.youtube.com/live_chat?embed=1&v=${this.videoLink.videoId}&embed_domain=${window.location.hostname}`,
-      chatStatus: this.$store.state.linkStore.chat,
+      chatStatus: this.$store.state.appbar.controlbarStatus.chat,
     };
   },
   computed: {
@@ -55,14 +55,19 @@ export default {
       return this.$refs.youtube.player
     },
     playingStatus() {
-      return this.$store.state.linkStore.playing
+      return this.$store.state.appbar.controlbarStatus.playing
     },
     mutedStatus() {
-      return this.$store.state.linkStore.muted
+      return this.$store.state.appbar.controlbarStatus.muted
     },
+    loadingCount() {
+      return 1 / this.$store.state.linkStore.appbarStatus.linkCount
+    }
   },
   mounted() {
     this.player.playVideo()
+    this.controlPlaying()
+    this.controlMuting()
   },
   watch: {
     playingStatus: function() {
@@ -77,7 +82,8 @@ export default {
       this.$store.commit('linkStore/removeLink', this.videoLink)
     },
     playing() {
-      // this.vPlaying = this.$store.state.linkStore.playing
+      // this.$store.appbar.appbarStatus.loadingProgress += this.loadingCount
+      // this.vPlaying = this.$store.state.appbar.controlbarStatus.playing
     },
     controlPlaying() {
     this.playingStatus ? (this.player.seekTo('end'), this.player.playVideo()) : this.player.pauseVideo()

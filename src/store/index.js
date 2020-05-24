@@ -3,6 +3,75 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
+const APP_BAR_STATUS = {
+  namespaced: true,
+  state: {
+    appbarStatus: {
+      controlbarExpend: false,
+      loadingProgress: 0,
+    },
+    controlbarStatus: {
+      chat: false,
+      playing: true,
+      muted: false,
+    }
+  },
+  mutations: {
+    setControlbarStatus(state, payload) {
+      state.appbarStatus.controlbarExpend = payload
+    },
+    setMutedStatus(state, payload) {
+      state.controlbarStatus.muted = payload
+    },
+    setLocalStorage(state) {
+      localStorage.appbarStatus = JSON.stringify({
+        controlbarExpend: state.appbarStatus.controlbarExpend ? state.appbarStatus.controlbarExpend : false,
+      }),
+      localStorage.controlbarStatus = JSON.stringify({
+        chat: state.controlbarStatus.chat,
+        playing: state.controlbarStatus.playing,
+        muted: state.controlbarStatus.muted ? state.controlbarStatus.muted : false,
+      })
+    },
+  },
+  actions: {
+    updateControlbarStatus({ commit }, payload) {
+      commit('setControlbarStatus', payload)
+      commit('setLocalStorage')
+    },
+    updateMutedStatus({ commit }, payload) {
+      commit('setMutedStatus', payload)
+      commit('setLocalStorage')
+    },
+    updateAppbarStatus({ commit, state }) {
+      if (!localStorage.appbarStatus && !localStorage.controlbarStatus) {
+        localStorage.appbarStatus = JSON.stringify({
+          controlbarExpend: false
+        }),
+        localStorage.controlbarStatus = JSON.stringify({
+          chat: false,
+          playing: true,
+          muted: false,
+        })
+      } else {
+        const localAppbarStatus = JSON.parse(localStorage.appbarStatus)
+        const localControlbarStatus = JSON.parse(localStorage.controlbarStatus)
+        commit('setControlbarStatus', localAppbarStatus.controlbarExpend)
+        commit('setMutedStatus', localControlbarStatus.muted)
+      }
+      state.appbarStatus.loadingProgress = 0
+    },
+  },
+  getters: {
+    controlbarExpend(state) {
+      return state.appbarStatus.controlbarExpend
+    },
+    progress(state) {
+      return state.appbarStatus.loadingProgress
+    }
+  },
+}
+
 const MESSANGE_MODULE = {
   namespaced: true,
   state: {
@@ -38,9 +107,6 @@ const LINK_STORE = {
     }],
     linkCount: 0,
     linkIndex: 0,
-    chat: false,
-    playing: true,
-    muted: false,
   },
   mutations: {
     addLink(state, payload) {
@@ -95,5 +161,6 @@ export default new Vuex.Store({
   modules: {
     messanges: MESSANGE_MODULE,
     linkStore: LINK_STORE,
+    appbar: APP_BAR_STATUS,
   }
 })

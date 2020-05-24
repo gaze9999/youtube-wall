@@ -35,8 +35,13 @@ export default {
   },
   created() {
     this.$store.dispatch('linkStore/updateLinks')
-    this.$log.info('storage: ', JSON.parse(localStorage.videoLocalStore))
-  }
+    this.$store.dispatch('appbar/updateAppbarStatus')
+  },
+  mounted() {
+    this.$log.debug('storage: ', JSON.parse(localStorage.videoLocalStore))
+    this.$log.debug('appbarStatus: ', JSON.parse(localStorage.appbarStatus))
+    this.$log.debug('controlbarStatus: ', JSON.parse(localStorage.controlbarStatus))
+  },
 };
 </script>
 

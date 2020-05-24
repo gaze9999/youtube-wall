@@ -1,5 +1,10 @@
 <template lang='pug'>
 v-container.frames(fluid)
+  v-progress-linear.v_loading(:active='loading'
+                              :background-opacity='.5'
+                              v-if='!loading'
+                              :value='progress'
+  )
   v-row(v-if='this.$store.state.linkStore.videoStore.length > 0')
     g-video-frame(v-for='link in videoLinks', :key='link.index', :videoLink='link')
 </template>
@@ -17,6 +22,8 @@ export default {
         videoId: String
       }],
       videoCount: this.$store.state.linkStore.videoStore.length,
+      loading: true,
+      progress: this.$store.getters.progress
     }
   },
   created() {
@@ -48,4 +55,8 @@ export default {
   display: flex
   flex-flow: row wrap
   position: relative
+.v_loading
+  position: absolute
+  top: 0
+  left: 0
 </style>

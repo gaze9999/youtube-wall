@@ -1,10 +1,10 @@
 <template lang='pug'>
 div.pr-2.mr-2.d-flex#control_bar
-  v-btn(icon='' small @click.stop='controlDisplay = !controlDisplay')
-    v-icon(small v-if='!controlDisplay') mdi-chevron-left
-    v-icon(small v-if='controlDisplay') mdi-chevron-right
+  v-btn(icon='' small @click.stop='setControlDisplay')
+    v-icon(small v-if='!controlbarExpend') mdi-chevron-left
+    v-icon(small v-if='controlbarExpend') mdi-chevron-right
   v-scroll-x-transition
-    div.btn_group(v-if='controlDisplay')
+    div.btn_group(v-if='controlbarExpend')
       v-tooltip(bottom v-if='!chat') 聊天室
         template(v-slot:activator='{ on }')
           v-btn(icon='' small v-on='on' @click.stop='showChat()' disabled)
@@ -68,21 +68,43 @@ export default {
     return {
       chat: false,
       playing: true,
-      muted: false,
       chatEmbed: String,
       shareDialog: false,
       linksList: [],
-      controlDisplay: false,
+    }
+  },
+  computed: {
+    linksListDisplay() {
+      return `${window.location.href}?link=${this.linksList.join(',')}`
+    },
+    linkCount() {
+      return this.$store.state.linkStore.linkCount
+    },
+    muted: {
+      get() {
+        return this.$store.state.appbar.controlbarStatus.muted
+      },
+      set(setMutedStatus) {
+        this.$store.dispatch('appbar/updateMutedStatus', setMutedStatus)
+      }
+    },
+    controlbarExpend: {
+      get() {
+        return this.$store.state.appbar.appbarStatus.controlbarExpend
+      },
+      set(setControlbarExpend) {
+        this.$store.dispatch('appbar/updateControlbarStatus', setControlbarExpend)
+      }
     }
   },
   methods: {
     showChat() {
       this.chat = !this.chat
-      this.$store.state.linkStore.chat = this.chat
+      this.$store.state.appbar.controlbarStatus.chat = this.chat
     },
     playControl() {
       this.playing = !this.playing
-      this.$store.state.linkStore.playing = this.playing
+      // this.$store.state.appbar.controlbarStatus.playing = this.playing
       const snackbarItem = {
         level: 1,
         messange: this.playing ? '全部播放' : '全部暫停'
@@ -91,7 +113,7 @@ export default {
     },
     mutedControl() {
       this.muted = !this.muted
-      this.$store.state.linkStore.muted = this.muted
+      // this.$store.state.appbar.controlbarStatus.muted = this.muted
       const snackbarItem = {
         level: 1,
         messange: this.muted ? '全部靜音' : '取消全部靜音'
@@ -125,19 +147,14 @@ export default {
       }
       this.$store.commit('messanges/bindMessange', snackbarItem)
     },
-  },
-  computed: {
-    linksListDisplay() {
-      return `${window.location.href}?link=${this.linksList.join(',')}`
-    },
-    linkCount() {
-      return this.$store.state.linkStore.linkCount
+    setControlDisplay() {
+      this.controlbarExpend = !this.controlbarExpend
     },
   },
   updated() {
-    this.$log.debug('chat: ', this.$store.state.linkStore.chat)
-    this.$log.debug('playing: ', this.$store.state.linkStore.playing)
-    this.$log.debug('muted: ', this.$store.state.linkStore.muted)
+    this.$log.debug('chat: ', this.$store.state.appbar.controlbarStatus.chat)
+    this.$log.debug('playing: ', this.$store.state.appbar.controlbarStatus.playing)
+    this.$log.debug('muted: ', this.$store.state.appbar.controlbarStatus.muted)
   }
 }
 </script>
