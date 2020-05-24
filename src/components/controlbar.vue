@@ -104,7 +104,7 @@ export default {
     },
     playControl() {
       this.playing = !this.playing
-      // this.$store.state.appbar.controlbarStatus.playing = this.playing
+      this.$store.state.appbar.controlbarStatus.playing = this.playing
       const snackbarItem = {
         level: 1,
         messange: this.playing ? '全部播放' : '全部暫停'
