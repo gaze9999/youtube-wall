@@ -23,6 +23,9 @@ const APP_BAR_STATUS = {
     setMutedStatus(state, payload) {
       state.controlbarStatus.muted = payload
     },
+    setPlayStatus(state, payload) {
+      state.controlbarStatus.playing = payload
+    },
     setLocalStorage(state) {
       localStorage.appbarStatus = JSON.stringify({
         controlbarExpend: state.appbarStatus.controlbarExpend ? state.appbarStatus.controlbarExpend : false,
@@ -41,6 +44,10 @@ const APP_BAR_STATUS = {
     },
     updateMutedStatus({ commit }, payload) {
       commit('setMutedStatus', payload)
+      commit('setLocalStorage')
+    },
+    updatePlayStatus({ commit }, payload) {
+      commit('setPlayStatus', payload)
       commit('setLocalStorage')
     },
     updateAppbarStatus({ commit, state }) {

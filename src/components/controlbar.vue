@@ -67,7 +67,6 @@ export default {
   data() {
     return {
       chat: false,
-      playing: true,
       chatEmbed: String,
       shareDialog: false,
       linksList: [],
@@ -79,6 +78,14 @@ export default {
     },
     linkCount() {
       return this.$store.state.linkStore.linkCount
+    },
+    playing: {
+      get() {
+        return this.$store.state.appbar.controlbarStatus.playing
+      },
+      set(setPlayStatus) {
+        this.$store.dispatch('appbar/updatePlayStatus', setPlayStatus)
+      }
     },
     muted: {
       get() {
@@ -104,7 +111,7 @@ export default {
     },
     playControl() {
       this.playing = !this.playing
-      this.$store.state.appbar.controlbarStatus.playing = this.playing
+      // this.$store.state.appbar.controlbarStatus.playing = this.playing
       const snackbarItem = {
         level: 1,
         messange: this.playing ? '全部播放' : '全部暫停'
