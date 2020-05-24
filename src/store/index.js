@@ -65,6 +65,7 @@ const APP_BAR_STATUS = {
         const localControlbarStatus = JSON.parse(localStorage.controlbarStatus)
         commit('setControlbarStatus', localAppbarStatus.controlbarExpend)
         commit('setMutedStatus', localControlbarStatus.muted)
+        commit('setPlayStatus', localControlbarStatus.playing)
       }
       state.appbarStatus.loadingProgress = 0
     },
