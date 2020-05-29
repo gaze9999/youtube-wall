@@ -31,7 +31,7 @@ export default {
     this.$log.debug('weburl: ', window.location.href)
     this.$log.debug('params: ', this.$route.query.link)
     if (this.$route.query.link) {
-      const paramLinks = this.$route.query.link.split(',')
+      const paramLinks = this.$route.query.link.split(',').reverse()
       paramLinks.forEach(element => {
         const link = {
           index: this.$store.state.linkStore.linkIndex,
