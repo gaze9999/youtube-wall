@@ -19,12 +19,30 @@ export default {
   methods: {
     sendLink() {
       if (this.inputLink !== '') {
+
+      const findYoutube = /.*(youtu)\.?be.*/i
+      const regExp = /.*youtu\.?be.*\/(.*\?v=)?([\S]{11})(&?|\?=).*/i
+      let getLink = this.inputLink
+      let verifyLink = this.inputLink.replace(findYoutube, '$1')
+      this.$log.debug('link: ', getLink)
+      this.$log.debug('verify link: ', verifyLink === 'youtu')
+
+      if (verifyLink === 'youtu') {
         const link = {
           index: this.$store.state.linkStore.linkIndex,
-          videoId: this.filterLink(this.inputLink)
+          videoId: getLink.replace(regExp, '$2')
         }
+        this.$log.debug('final link id: ', link.videoId)
         this.$store.dispatch('linkStore/updateLinks', link)
-        this.inputLink = ''
+        return getLink
+        } else {
+          const snackbarItem = {
+            level: 1,
+            messange: '這不是有效連結'
+          }
+          this.$store.commit('messanges/bindMessange', snackbarItem)
+        }
+
       } else {
         const snackbarItem = {
           level: 1,
@@ -32,21 +50,8 @@ export default {
         }
         this.$store.commit('messanges/bindMessange', snackbarItem)
       }
+      this.inputLink = ''
     },
-    filterLink(link) {
-      var getLink = ''
-      this.$log.info('link: ', link)
-      link = link.split('/')
-      link[0] !== 'https:' ?
-        (getLink = link[1]) :
-        (getLink = link[3])
-      getLink.length > 11 && (
-        getLink = getLink.split('watch?v=')[1]
-      ) & (
-        getLink = getLink.slice(0, 11)
-      )
-      return getLink
-    }
   }
 };
 </script>
