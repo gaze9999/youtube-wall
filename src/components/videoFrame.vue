@@ -80,6 +80,12 @@ export default {
   methods: {
     remove() {
       this.$store.commit('linkStore/removeLink', this.videoLink)
+      localStorage.videoLocalStore = JSON.stringify(this.$store.state.linkStore.videoStore)
+      const snackbarItem = {
+          level: 1,
+          messange: `影片刪除`
+      }
+      this.$store.commit('messanges/bindMessange', snackbarItem)
     },
     playing() {
       // this.$store.appbar.appbarStatus.loadingProgress += this.loadingCount
@@ -91,14 +97,6 @@ export default {
     controlMuting() {
     this.mutedStatus ? this.player.mute() : this.player.unMute()
     },
-  },
-  beforeDestroy() {
-    localStorage.videoLocalStore = JSON.stringify(this.$store.state.linkStore.videoStore)
-    const snackbarItem = {
-        level: 1,
-        messange: `影片刪除, ID = ${this.vLinkId}`
-    }
-    this.$store.commit('messanges/bindMessange', snackbarItem)
   },
 }
 </script>
