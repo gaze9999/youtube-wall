@@ -34,7 +34,6 @@ export default {
         }
         this.$log.debug('final link id: ', link.videoId)
         this.$store.dispatch('linkStore/updateLinks', link)
-        return getLink
         } else {
           const snackbarItem = {
             level: 1,
@@ -42,7 +41,6 @@ export default {
           }
           this.$store.commit('messanges/bindMessange', snackbarItem)
         }
-
       } else {
         const snackbarItem = {
           level: 1,
