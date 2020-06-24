@@ -6,7 +6,7 @@ div
 <script>
 export default {
   components: {
-    'g-vtuber-card': () => import('@/components/vtuberCard.vue')
+    'g-vtuber-card': () => import('@/components/test/vtuberCard.vue')
   }
   
 }

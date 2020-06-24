@@ -1,7 +1,8 @@
 .DS_Store
 node_modules
 dist
-./components/test/*
+
+src/components/test/*
 
 # local env files
 .env.local
