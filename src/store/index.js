@@ -111,7 +111,8 @@ const LINK_STORE = {
   state: {
     videoStore: [{
       index: Number,
-      videoId: String
+      videoId: String,
+      loop: false,
     }],
     linkCount: 0,
     linkIndex: 0,
@@ -144,6 +145,9 @@ const LINK_STORE = {
       state.linkIndex = 0
       state.linkCount = 0
     },
+    updateLoopStatus(state, payload) {
+      state.videoStore[payload].loop = !state.videoStore[payload].loop
+    }
   },
   actions: {
     updateLinks({ commit, state }, payload) {
@@ -158,7 +162,25 @@ const LINK_STORE = {
           localStorage.videoLocalStore = '[]'
         }
       }
-    }
+    },
+    updateLoopStatus({ commit, state }, payload) {
+      const itemIndex = state.videoStore.findIndex(link => link.index === payload)
+      if (itemIndex + 1 > 0) {
+        commit('updateLoopStatus', itemIndex)
+        const messange = {
+          level: 1,
+          messange: '影片重複撥放',
+        }
+        this.commit('messanges/bindMessange', messange)
+        localStorage.videoLocalStore = JSON.stringify(state.videoStore)
+      } else {
+        const messange = {
+          level: 1,
+          messange: '停止重複撥放',
+        }
+        this.commit('messanges/bindMessange', messange)
+      }
+    },
   },
   getters: {
 

@@ -30,7 +30,8 @@ export default {
       if (verifyLink === 'youtu') {
         const link = {
           index: this.$store.state.linkStore.linkIndex,
-          videoId: getLink.replace(regExp, '$2')
+          videoId: getLink.replace(regExp, '$2'),
+          loop: false,
         }
         this.$log.debug('final link id: ', link.videoId)
         this.$store.dispatch('linkStore/updateLinks', link)
