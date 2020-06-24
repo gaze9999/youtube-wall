@@ -9,6 +9,7 @@ import VueLogger from 'vuejs-logger'
 import VueYoutube from 'vue-youtube'
 import VueClipboard from 'vue-clipboard2'
 import VueGtm from 'vue-gtm'
+import VueResource from 'vue-resource'
 
 const isProduction = process.env.NODE_ENV === 'production'
 
@@ -31,6 +32,7 @@ Vue.use(VueGtm, {
 Vue.use(VueLogger, vueLoggerOptions)
 Vue.use(VueYoutube)
 Vue.use(VueClipboard)
+Vue.use(VueResource)
 Vue.config.productionTip = false
 
 new Vue({
