@@ -45,16 +45,17 @@ div.pr-2.mr-2.d-flex#control_bar
         v-card.text-center(v-if='shareDialog')
           v-card-title.headline.grey.lighten-2(primary-title) 分享連結
           v-input.share_links(:messages='linksListDisplay' readonly)
-          h4 按鈕開發中，請先手動複製
+          input(:messages='linksListDisplay' readonly style='display: none')
           v-card-actions
             v-spacer
               v-btn(color='info'
                     small
-                    disabled
                     @click.stop='copyLinks'
+                    v-clipboard:copy='linksListDisplay'
                     v-clipboard:error='onError'
-              ) 複製連結
-                v-icon.ml-3(small) mdi-share-variant
+              ) 
+                h2.mx-3 複製連結
+                v-icon(small) mdi-share-variant
       g-remove-all
 </template>
 
