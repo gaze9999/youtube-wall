@@ -14,7 +14,6 @@ const APP_BAR_STATUS = {
       chat: false,
       playing: true,
       muted: false,
-      videoControl: false,
     }
   },
   mutations: {
@@ -27,9 +26,6 @@ const APP_BAR_STATUS = {
     setPlayStatus(state, payload) {
       state.controlbarStatus.playing = payload
     },
-    setVideoControlStatus(state, payload) {
-      state.controlbarStatus.videoControl = payload
-    },
     setLocalStorage(state) {
       localStorage.appbarStatus = JSON.stringify({
         controlbarExpend: state.appbarStatus.controlbarExpend ? state.appbarStatus.controlbarExpend : false,
@@ -38,7 +34,6 @@ const APP_BAR_STATUS = {
         chat: state.controlbarStatus.chat,
         playing: state.controlbarStatus.playing,
         muted: state.controlbarStatus.muted ? state.controlbarStatus.muted : false,
-        videoControl: state.controlbarStatus.videoControl ? state.controlbarStatus.videoControl : false,
       })
     },
   },
@@ -55,10 +50,6 @@ const APP_BAR_STATUS = {
       commit('setPlayStatus', payload)
       commit('setLocalStorage')
     },
-    updateVideoControlStatus({ commit }, payload) {
-      commit('setVideoControlStatus', payload)
-      commit('setLocalStorage')
-    },
     updateAppbarStatus({ commit, state }) {
       if (!localStorage.appbarStatus && !localStorage.controlbarStatus) {
         localStorage.appbarStatus = JSON.stringify({
@@ -68,7 +59,6 @@ const APP_BAR_STATUS = {
           chat: false,
           playing: true,
           muted: false,
-          videoControl: false,
         })
       } else {
         const localAppbarStatus = JSON.parse(localStorage.appbarStatus)
@@ -76,7 +66,6 @@ const APP_BAR_STATUS = {
         commit('setControlbarStatus', localAppbarStatus.controlbarExpend)
         commit('setMutedStatus', localControlbarStatus.muted)
         commit('setPlayStatus', localControlbarStatus.playing)
-        commit('setVideoControlStatus', localControlbarStatus.videoControl)
       }
       state.appbarStatus.loadingProgress = 0
     },

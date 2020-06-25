@@ -32,15 +32,6 @@ div.pr-2.mr-2.d-flex#control_bar
           v-btn(icon='' small v-on='on' color='info' @click.stop='mutedControl')
             v-icon(small) mdi-volume-mute
 
-      v-tooltip(bottom v-if='videoControls') 顯示影片控制按鈕
-        template(v-slot:activator='{ on }')
-          v-btn(icon='' small v-on='on' @click.stop='videoControl')
-            v-icon(small) mdi-remote
-      v-tooltip(bottom v-if='!videoControls') 隱藏影片控制按鈕
-        template(v-slot:activator='{ on }')
-          v-btn(icon='' small v-on='on' color='info' @click.stop='videoControl')
-            v-icon(small) mdi-remote-off
-
       v-tooltip(bottom v-if='linkCount > 0') 分享
         template(v-slot:activator='{ on }')
           v-btn(icon='' small v-on='on' @click.stop='share()')
@@ -113,14 +104,6 @@ export default {
         this.$store.dispatch('appbar/updateControlbarStatus', setControlbarExpend)
       }
     },
-    videoControls: {
-      get() {
-        return this.$store.state.appbar.controlbarStatus.videoControl
-      },
-      set(setVideoControl) {
-        this.$store.dispatch('appbar/updateVideoControlStatus', setVideoControl)
-      }
-    }
   },
   methods: {
     showChat() {
@@ -142,14 +125,6 @@ export default {
       const snackbarItem = {
         level: 1,
         messange: this.muted ? '全部靜音' : '取消全部靜音'
-      }
-      this.$store.commit('messanges/bindMessange', snackbarItem)
-    },
-    videoControl() {
-      this.videoControls = !this.videoControls
-      const snackbarItem = {
-        level: 1,
-        messange: this.videoControls ? '按鈕顯示' : '按鈕隱藏'
       }
       this.$store.commit('messanges/bindMessange', snackbarItem)
     },

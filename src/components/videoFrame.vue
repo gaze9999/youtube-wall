@@ -2,36 +2,34 @@
 v-scroll-y-transition
   v-col.youtube_frame
     v-hover(v-slot:default='{ hover }', close-delay='400')
-      div.v_btn(v-if='videoControlStatus')
-        v-btn(icon=''
-              @click.stop='remove'
-              color='white'
-              absolute
-              large
-              right
-              :style='`opacity: ${hover ? 1 : .75}`'
-        )
-          v-icon mdi-close-circle
-        v-btn(icon=''
-              v-if='!vLinkLoop'
-              @click.stop='setLoop'
-              color='white'
-              absolute
-              large
-              right
-              :style='`opacity: ${hover ? .75 : .25}`'
-        )
-          v-icon mdi-sync
-        v-btn(icon=''
-              v-if='vLinkLoop'
-              @click.stop='setLoop'
-              color='white'
-              absolute
-              large
-              right
-              :style='`opacity: 1`'
-        )
-          v-icon mdi-sync
+      div.btn_cover(:class='{active: hover}')
+        v-hover(v-slot:default='{ hover }', close-delay='400')
+          div.v_btn
+            v-btn(icon=''
+                  @click.stop='remove'
+                  color='white'
+                  small
+                  :style='`opacity: ${hover ? 1 : .25}`'
+            )
+              v-icon mdi-close-circle
+        v-hover(v-slot:default='{ hover }', close-delay='400')
+          div.v_btn
+            v-btn(icon=''
+                  v-if='!vLinkLoop'
+                  @click.stop='setLoop'
+                  color='white'
+                  small
+                  :style='`opacity: ${hover ? .75 : .25}`'
+            )
+              v-icon mdi-sync
+            v-btn(icon=''
+                  v-if='vLinkLoop'
+                  @click.stop='setLoop'
+                  color='white'
+                  small
+                  :style='`opacity: 1`'
+            )
+              v-icon mdi-sync
     youtube(:id='"player-" + vLinkId'
             :video-id='videoLink.videoId'
             ref='youtube'
@@ -94,12 +92,6 @@ export default {
     mutedStatus() {
       return this.$store.state.appbar.controlbarStatus.muted
     },
-    videoControlStatus() {
-      return this.$store.state.appbar.controlbarStatus.videoControl
-    },
-    loadingCount() {
-      return 1 / this.$store.state.linkStore.appbarStatus.linkCount
-    }
   },
   mounted() {
     this.player.playVideo()
@@ -150,7 +142,7 @@ export default {
 .youtube_frame
   position: relative
   display: flex
-  flex-flow: row-reverse
+  flex-flow: column
   flex: 0 50%
   min-height: calc(50vh - 64px)
   max-height: 50%
@@ -162,13 +154,24 @@ export default {
   max-width: 50%
   flex-basis: 50%
   border: 0px
-.v_btn
-  display: flex
-  flex-flow: row wrap
-  background-color: #666666c0
-  height: calc(100% - 24px)
-  width: calc(2rem + 44px)
+.btn_cover
+  right: .75rem
+  width: calc(100% - 1.5rem)
+  height: calc(15% - 1.5rem)
   position: absolute
-  button:nth-child(2)
-    top: 4em
+  transition: .4s
+  background: transparent
+  &.active
+    height: calc(20% - 1.5rem)
+    background: linear-gradient(to bottom, #000000, #66666600)
+    // pointer-events: none
+  &:not(.active) .v_btn
+    transition: .4s
+    opacity: 0
+.v_btn
+  top: .25rem
+  right: .5rem
+  position: absolute
+  &:nth-child(2)
+    right: 2.5rem
 </style>
