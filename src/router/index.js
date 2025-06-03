@@ -1,9 +1,6 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import Main from '../views/main.vue'
 import vtuberList from '../views/vtuberList.vue'
-
-Vue.use(VueRouter)
 
 const routes = [
   {
@@ -16,15 +13,15 @@ const routes = [
     name: 'Vtuber List',
     component: vtuberList
   },
-  { path: '*',
+  {
+    path: '/:pathMatch(.*)*',
     redirect: '/youtube-wall/'
   },
 ]
 
-const router = new VueRouter({
+const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
   routes,
-  mode: 'history',
-  hash: false,
 })
 
 export default router

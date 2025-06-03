@@ -18,7 +18,7 @@ v-app
           v-btn(icon='' small to='/youtube-wall/' v-on='on')
             v-icon(small) mdi-television
     g-main-menu
-  v-content
+  v-main
     router-view
   g-snack-bar
 </template>

@@ -1,15 +1,14 @@
-import Vue from 'vue'
+import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
 
 // custom components
 import vuetify from './plugins/vuetify'
-import VueLogger from 'vuejs-logger'
-import VueYoutube from 'vue-youtube'
+import VueLogger from 'vuejs3-logger'
+import VueYoutube from '@vue-youtube/core'
 import VueClipboard from 'vue-clipboard2'
 import VueGtm from 'vue-gtm'
-import VueResource from 'vue-resource'
 
 const isProduction = process.env.NODE_ENV === 'production'
 
@@ -23,21 +22,18 @@ const vueLoggerOptions = {
   showConsoleColors: true
 }
 
-Vue.use(VueGtm, {
+const app = createApp(App)
+
+app.use(router)
+app.use(store)
+app.use(vuetify)
+app.use(VueGtm, {
   id: 'GTM-MMCLTMJ',
   enabled: true,
   debug: false,
-});
+})
+app.use(VueLogger, vueLoggerOptions)
+app.use(VueYoutube)
+app.use(VueClipboard)
 
-Vue.use(VueLogger, vueLoggerOptions)
-Vue.use(VueYoutube)
-Vue.use(VueClipboard)
-Vue.use(VueResource)
-Vue.config.productionTip = false
-
-new Vue({
-  router,
-  store,
-  vuetify,
-  render: h => h(App)
-}).$mount('#app')
+app.mount('#app')

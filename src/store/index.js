@@ -1,7 +1,4 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-
-Vue.use(Vuex)
+import { createStore } from 'vuex'
 
 const APP_BAR_STATUS = {
   namespaced: true,
@@ -196,10 +193,11 @@ const LINK_STORE = {
   },
 }
 
-export default new Vuex.Store({
+export default createStore({
   modules: {
     messanges: MESSANGE_MODULE,
     linkStore: LINK_STORE,
     appbar: APP_BAR_STATUS,
   }
 })
+
